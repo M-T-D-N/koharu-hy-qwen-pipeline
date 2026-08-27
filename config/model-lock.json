@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "models": {
+    "hy-mt2-7b": {
+      "repo_id": "tencent/Hy-MT2-7B",
+      "revision": "9b0eb4e8f001def3e5ff6469a0ac96fdb39ec223",
+      "license": "Apache-2.0",
+      "parameters": 8029540352,
+      "tensor_type": "BF16",
+      "official_prompt": "Translate the following text into Korean. Note that you should only output the translated result without any additional explanation:\n\n{source_text}"
+    }
+  }
+}

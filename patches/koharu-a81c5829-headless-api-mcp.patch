@@ -1,0 +1,2851 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index cf4c562..09b6864 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -749,6 +749,58 @@ dependencies = [
+  "pkg-config",
+ ]
+ 
++[[package]]
++name = "axum"
++version = "0.8.9"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "31b698c5f9a010f6573133b09e0de5408834d0c82f8d7475a89fc1867a71cd90"
++dependencies = [
++ "axum-core",
++ "bytes",
++ "form_urlencoded",
++ "futures-util",
++ "http 1.5.0",
++ "http-body",
++ "http-body-util",
++ "hyper",
++ "hyper-util",
++ "itoa",
++ "matchit",
++ "memchr",
++ "mime",
++ "percent-encoding",
++ "pin-project-lite",
++ "serde_core",
++ "serde_json",
++ "serde_path_to_error",
++ "serde_urlencoded",
++ "sync_wrapper",
++ "tokio",
++ "tower",
++ "tower-layer",
++ "tower-service",
++ "tracing",
++]
++
++[[package]]
++name = "axum-core"
++version = "0.5.6"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "08c78f31d7b1291f7ee735c1c6780ccde7785daae9a9206026862dab7d8792d1"
++dependencies = [
++ "bytes",
++ "futures-core",
++ "http 1.5.0",
++ "http-body",
++ "http-body-util",
++ "mime",
++ "pin-project-lite",
++ "sync_wrapper",
++ "tower-layer",
++ "tower-service",
++ "tracing",
++]
++
+ [[package]]
+ name = "backon"
+ version = "1.6.0"
+@@ -3893,6 +3945,7 @@ dependencies = [
+  "http 1.5.0",
+  "http-body",
+  "httparse",
++ "httpdate",
+  "itoa",
+  "pin-project-lite",
+  "smallvec",
+@@ -4743,6 +4796,7 @@ dependencies = [
+  "alphanumeric-sort",
+  "anyhow",
+  "async-trait",
++ "axum",
+  "base64 0.23.1",
+  "dirs",
+  "futures",
+@@ -5542,6 +5596,12 @@ version = "0.1.10"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "2532096657941c2fea9c289d370a250971c689d4f143798ff67113ec042024a5"
+ 
++[[package]]
++name = "matchit"
++version = "0.8.4"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "47e1ffaa40ddd1f3ed91f717a33c8c0ee23fff369e3aa8772b9605cc1d22f4c3"
++
+ [[package]]
+ name = "matrixmultiply"
+ version = "0.3.11"
+@@ -8580,6 +8640,17 @@ dependencies = [
+  "zmij",
+ ]
+ 
++[[package]]
++name = "serde_path_to_error"
++version = "0.1.20"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "10a9ff822e371bb5403e391ecd83e182e0e77ba7f6fe0160b795797109d1b457"
++dependencies = [
++ "itoa",
++ "serde",
++ "serde_core",
++]
++
+ [[package]]
+ name = "serde_repr"
+ version = "0.1.21"
+@@ -9406,7 +9477,7 @@ checksum = "61c41af27dd6d1e27b1b16b489db798443478cef1f06a660c96db617ba5de3b1"
+ [[package]]
+ name = "tauri"
+ version = "2.11.5"
+-source = "git+https://github.com/tauri-apps/tauri?branch=feat%2Fcef#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
++source = "git+https://github.com/tauri-apps/tauri?rev=f5bf953fe2a259f2d176491f50ec2930fb73e03d#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
+ dependencies = [
+  "anyhow",
+  "bytes",
+@@ -9457,7 +9528,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-build"
+ version = "2.6.3"
+-source = "git+https://github.com/tauri-apps/tauri?branch=feat%2Fcef#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
++source = "git+https://github.com/tauri-apps/tauri?rev=f5bf953fe2a259f2d176491f50ec2930fb73e03d#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
+ dependencies = [
+  "anyhow",
+  "cargo_toml",
+@@ -9477,7 +9548,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-codegen"
+ version = "2.6.3"
+-source = "git+https://github.com/tauri-apps/tauri?branch=feat%2Fcef#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
++source = "git+https://github.com/tauri-apps/tauri?rev=f5bf953fe2a259f2d176491f50ec2930fb73e03d#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
+ dependencies = [
+  "base64 0.22.1",
+  "brotli",
+@@ -9503,7 +9574,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-macros"
+ version = "2.6.3"
+-source = "git+https://github.com/tauri-apps/tauri?branch=feat%2Fcef#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
++source = "git+https://github.com/tauri-apps/tauri?rev=f5bf953fe2a259f2d176491f50ec2930fb73e03d#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
+ dependencies = [
+  "heck 0.5.0",
+  "proc-macro2",
+@@ -9516,7 +9587,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-plugin"
+ version = "2.6.3"
+-source = "git+https://github.com/tauri-apps/tauri?branch=feat%2Fcef#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
++source = "git+https://github.com/tauri-apps/tauri?rev=f5bf953fe2a259f2d176491f50ec2930fb73e03d#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
+ dependencies = [
+  "anyhow",
+  "glob",
+@@ -9531,7 +9602,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-plugin-log"
+ version = "2.8.0"
+-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=feat%2Fcef#1423992771e0b57582ca3b06a6adc46ec26aa784"
++source = "git+https://github.com/tauri-apps/plugins-workspace?rev=1423992771e0b57582ca3b06a6adc46ec26aa784#1423992771e0b57582ca3b06a6adc46ec26aa784"
+ dependencies = [
+  "android_logger",
+  "fern",
+@@ -9551,7 +9622,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-plugin-opener"
+ version = "2.5.4"
+-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=feat%2Fcef#1423992771e0b57582ca3b06a6adc46ec26aa784"
++source = "git+https://github.com/tauri-apps/plugins-workspace?rev=1423992771e0b57582ca3b06a6adc46ec26aa784#1423992771e0b57582ca3b06a6adc46ec26aa784"
+ dependencies = [
+  "dunce",
+  "glob",
+@@ -9572,7 +9643,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-plugin-process"
+ version = "2.3.1"
+-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=feat%2Fcef#1423992771e0b57582ca3b06a6adc46ec26aa784"
++source = "git+https://github.com/tauri-apps/plugins-workspace?rev=1423992771e0b57582ca3b06a6adc46ec26aa784#1423992771e0b57582ca3b06a6adc46ec26aa784"
+ dependencies = [
+  "tauri",
+  "tauri-plugin",
+@@ -9581,7 +9652,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-plugin-single-instance"
+ version = "2.4.2"
+-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=feat%2Fcef#1423992771e0b57582ca3b06a6adc46ec26aa784"
++source = "git+https://github.com/tauri-apps/plugins-workspace?rev=1423992771e0b57582ca3b06a6adc46ec26aa784#1423992771e0b57582ca3b06a6adc46ec26aa784"
+ dependencies = [
+  "serde",
+  "serde_json",
+@@ -9595,7 +9666,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-plugin-updater"
+ version = "2.10.1"
+-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=feat%2Fcef#1423992771e0b57582ca3b06a6adc46ec26aa784"
++source = "git+https://github.com/tauri-apps/plugins-workspace?rev=1423992771e0b57582ca3b06a6adc46ec26aa784#1423992771e0b57582ca3b06a6adc46ec26aa784"
+ dependencies = [
+  "base64 0.22.1",
+  "dirs",
+@@ -9627,7 +9698,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-plugin-window-state"
+ version = "2.4.1"
+-source = "git+https://github.com/tauri-apps/plugins-workspace?branch=feat%2Fcef#1423992771e0b57582ca3b06a6adc46ec26aa784"
++source = "git+https://github.com/tauri-apps/plugins-workspace?rev=1423992771e0b57582ca3b06a6adc46ec26aa784#1423992771e0b57582ca3b06a6adc46ec26aa784"
+ dependencies = [
+  "bitflags 2.13.1",
+  "log",
+@@ -9641,7 +9712,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-runtime"
+ version = "2.11.3"
+-source = "git+https://github.com/tauri-apps/tauri?branch=feat%2Fcef#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
++source = "git+https://github.com/tauri-apps/tauri?rev=f5bf953fe2a259f2d176491f50ec2930fb73e03d#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
+ dependencies = [
+  "cookie",
+  "dpi",
+@@ -9662,7 +9733,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-runtime-cef"
+ version = "0.1.0"
+-source = "git+https://github.com/tauri-apps/tauri?branch=feat%2Fcef#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
++source = "git+https://github.com/tauri-apps/tauri?rev=f5bf953fe2a259f2d176491f50ec2930fb73e03d#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
+ dependencies = [
+  "base64 0.22.1",
+  "cef",
+@@ -9697,7 +9768,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-runtime-wry"
+ version = "2.11.4"
+-source = "git+https://github.com/tauri-apps/tauri?branch=feat%2Fcef#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
++source = "git+https://github.com/tauri-apps/tauri?rev=f5bf953fe2a259f2d176491f50ec2930fb73e03d#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
+ dependencies = [
+  "gtk",
+  "http 1.5.0",
+@@ -9754,7 +9825,7 @@ dependencies = [
+ [[package]]
+ name = "tauri-utils"
+ version = "2.9.3"
+-source = "git+https://github.com/tauri-apps/tauri?branch=feat%2Fcef#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
++source = "git+https://github.com/tauri-apps/tauri?rev=f5bf953fe2a259f2d176491f50ec2930fb73e03d#f5bf953fe2a259f2d176491f50ec2930fb73e03d"
+ dependencies = [
+  "anyhow",
+  "brotli",
+@@ -10253,6 +10324,7 @@ dependencies = [
+  "tokio",
+  "tower-layer",
+  "tower-service",
++ "tracing",
+ ]
+ 
+ [[package]]
+diff --git a/Cargo.toml b/Cargo.toml
+index f8f1b73..60dfe18 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -50,6 +50,7 @@ image = "0.25.10"
+ webp = { version = "0.3.1" }
+ fast_image_resize = { version = "6.1.0", features = ["image", "rayon"] }
+ anyhow = "1.0.104"
++axum = { version = "0.8.8", features = ["http1", "json", "tokio"] }
+ async-trait = "0.1.92"
+ backon = { version = "1.6.0", default-features = false, features = ["std", "tokio-sleep"] }
+ imageproc = "0.27.0"
+@@ -120,7 +121,7 @@ jieba-rs = "0.10.3"
+ fontique = "0.11.0"
+ pollster = "1.0.1"
+ vello = "0.10.0"
+-tauri = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef", default-features = false, features = [
++tauri = { git = "https://github.com/tauri-apps/tauri", rev = "f5bf953fe2a259f2d176491f50ec2930fb73e03d", default-features = false, features = [
+     "cef",
+     "compression",
+     "dbus",
+@@ -130,13 +131,13 @@ tauri = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef", defa
+     "x11",
+     "devtools",
+ ] }
+-tauri-build = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef" }
+-tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "feat/cef" }
+-tauri-plugin-opener = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "feat/cef" }
+-tauri-plugin-process = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "feat/cef" }
+-tauri-plugin-single-instance = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "feat/cef" }
+-tauri-plugin-updater = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "feat/cef" }
+-tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "feat/cef" }
++tauri-build = { git = "https://github.com/tauri-apps/tauri", rev = "f5bf953fe2a259f2d176491f50ec2930fb73e03d" }
++tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", rev = "1423992771e0b57582ca3b06a6adc46ec26aa784" }
++tauri-plugin-opener = { git = "https://github.com/tauri-apps/plugins-workspace", rev = "1423992771e0b57582ca3b06a6adc46ec26aa784" }
++tauri-plugin-process = { git = "https://github.com/tauri-apps/plugins-workspace", rev = "1423992771e0b57582ca3b06a6adc46ec26aa784" }
++tauri-plugin-single-instance = { git = "https://github.com/tauri-apps/plugins-workspace", rev = "1423992771e0b57582ca3b06a6adc46ec26aa784" }
++tauri-plugin-updater = { git = "https://github.com/tauri-apps/plugins-workspace", rev = "1423992771e0b57582ca3b06a6adc46ec26aa784" }
++tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", rev = "1423992771e0b57582ca3b06a6adc46ec26aa784" }
+ tauri-specta = { version = "=2.0.0-rc.25", features = ["derive", "typescript"] }
+ schemars = { version = "1.2.2", features = ["chrono04", "indexmap2", "uuid1"] }
+ uuid = { version = "1.24.1", features = ["v4", "v7", "serde"] }
+@@ -177,13 +178,13 @@ libc = "0.2.189"
+ memmap2 = "0.9.11"
+ 
+ [patch.crates-io]
+-tauri = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef" }
+-tauri-build = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef" }
+-tauri-codegen = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef" }
+-tauri-macros = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef" }
+-tauri-plugin = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef" }
+-tauri-runtime = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef" }
+-tauri-utils = { git = "https://github.com/tauri-apps/tauri", branch = "feat/cef" }
++tauri = { git = "https://github.com/tauri-apps/tauri", rev = "f5bf953fe2a259f2d176491f50ec2930fb73e03d" }
++tauri-build = { git = "https://github.com/tauri-apps/tauri", rev = "f5bf953fe2a259f2d176491f50ec2930fb73e03d" }
++tauri-codegen = { git = "https://github.com/tauri-apps/tauri", rev = "f5bf953fe2a259f2d176491f50ec2930fb73e03d" }
++tauri-macros = { git = "https://github.com/tauri-apps/tauri", rev = "f5bf953fe2a259f2d176491f50ec2930fb73e03d" }
++tauri-plugin = { git = "https://github.com/tauri-apps/tauri", rev = "f5bf953fe2a259f2d176491f50ec2930fb73e03d" }
++tauri-runtime = { git = "https://github.com/tauri-apps/tauri", rev = "f5bf953fe2a259f2d176491f50ec2930fb73e03d" }
++tauri-utils = { git = "https://github.com/tauri-apps/tauri", rev = "f5bf953fe2a259f2d176491f50ec2930fb73e03d" }
+ 
+ [profile.dev]
+ debug = 1
+diff --git a/crates/koharu-app/Cargo.toml b/crates/koharu-app/Cargo.toml
+index a7b09e7..c1f7748 100644
+--- a/crates/koharu-app/Cargo.toml
++++ b/crates/koharu-app/Cargo.toml
+@@ -13,6 +13,7 @@ license.workspace = true
+ [dependencies]
+ alphanumeric-sort = { workspace = true }
+ anyhow = { workspace = true }
++axum = { workspace = true }
+ async-trait = { workspace = true }
+ base64 = { workspace = true }
+ dirs = { workspace = true }
+diff --git a/crates/koharu-app/src/api.rs b/crates/koharu-app/src/api.rs
+new file mode 100644
+index 0000000..f77899f
+--- /dev/null
++++ b/crates/koharu-app/src/api.rs
+@@ -0,0 +1,870 @@
++use std::{convert::Infallible, path::PathBuf, time::Duration};
++
++use anyhow::{Context as _, Result};
++use axum::{
++    Json, Router,
++    extract::{Path as AxumPath, State},
++    http::StatusCode,
++    response::{
++        Html, IntoResponse, Response,
++        sse::{Event, KeepAlive, Sse},
++    },
++    routing::{get, post},
++};
++use futures::stream;
++use koharu_scene::{EntityId, Revision};
++use serde::{Deserialize, Serialize};
++use serde_json::{Value, json};
++use tauri::{AppHandle, Cef, Manager as _};
++use tokio::sync::broadcast;
++
++use crate::commands::{
++    Error as CommandError,
++    editing::{self, GeometryUpdate, TypographyUpdate},
++    fonts,
++    lifecycle::{self, Initialization},
++    output::{self, ExportFormat},
++    preferences,
++    processing::{self, Job, JobId, Processing},
++    project::{CurrentProject, Page, Project, ProjectInfo, ProjectSummary, Typography},
++};
++
++const MCP_PROTOCOL_VERSION: &str = "2026-07-28";
++const MCP_LEGACY_VERSION: &str = "2025-11-25";
++
++#[derive(Clone, Debug, Serialize)]
++struct Health {
++    status: &'static str,
++    version: &'static str,
++    initialized: bool,
++    initialization_error: Option<String>,
++}
++
++#[derive(Clone, Debug, Serialize)]
++#[serde(tag = "event", content = "data", rename_all = "snake_case")]
++enum ApiEvent {
++    Job(Job),
++}
++
++pub(crate) struct ApiEvents {
++    sender: broadcast::Sender<ApiEvent>,
++}
++
++impl Default for ApiEvents {
++    fn default() -> Self {
++        let (sender, _) = broadcast::channel(256);
++        Self { sender }
++    }
++}
++
++impl ApiEvents {
++    pub(crate) fn publish_job(&self, job: Job) {
++        let _ = self.sender.send(ApiEvent::Job(job));
++    }
++}
++
++#[derive(Debug)]
++struct ApiError {
++    status: StatusCode,
++    message: String,
++}
++
++impl ApiError {
++    fn bad_request(error: impl std::fmt::Display) -> Self {
++        Self {
++            status: StatusCode::BAD_REQUEST,
++            message: error.to_string(),
++        }
++    }
++
++    fn internal(error: impl std::fmt::Display) -> Self {
++        Self {
++            status: StatusCode::INTERNAL_SERVER_ERROR,
++            message: error.to_string(),
++        }
++    }
++
++    fn conflict(error: impl std::fmt::Display) -> Self {
++        Self {
++            status: StatusCode::CONFLICT,
++            message: error.to_string(),
++        }
++    }
++}
++
++impl From<CommandError> for ApiError {
++    fn from(error: CommandError) -> Self {
++        Self::bad_request(error.message())
++    }
++}
++
++impl IntoResponse for ApiError {
++    fn into_response(self) -> Response {
++        (self.status, Json(json!({ "error": self.message }))).into_response()
++    }
++}
++
++#[derive(Debug, Deserialize)]
++struct NameRequest {
++    name: String,
++}
++
++#[derive(Debug, Deserialize)]
++struct ImportRequest {
++    paths: Vec<PathBuf>,
++}
++
++#[derive(Debug, Deserialize)]
++struct PreferencesRequest {
++    pipeline: koharu_pipeline::PipelineConfig,
++    providers: preferences::ProviderPreferences,
++    typesetting: koharu_renderer::TypesettingConfig,
++}
++
++#[derive(Debug, Deserialize)]
++struct SelectPageRequest {
++    page: EntityId,
++}
++
++#[derive(Debug, Deserialize)]
++struct SourceTextRequest {
++    layer: EntityId,
++    text: String,
++}
++
++#[derive(Debug, Deserialize)]
++struct TranslationRequest {
++    layer: EntityId,
++    text: Option<String>,
++}
++
++#[derive(Debug, Deserialize)]
++struct ReviewDecisionRequest {
++    expected_revision: Revision,
++    layer: EntityId,
++    text: Option<String>,
++    typography: Option<Typography>,
++    #[serde(default)]
++    preserve_source_pixels: bool,
++}
++
++#[derive(Debug, Deserialize)]
++struct TypographyRequest {
++    updates: Vec<TypographyUpdate>,
++}
++
++#[derive(Debug, Deserialize)]
++struct GeometryRequest {
++    updates: Vec<GeometryUpdate>,
++}
++
++#[derive(Debug, Deserialize)]
++struct DeleteLayersRequest {
++    layers: Vec<EntityId>,
++}
++
++#[derive(Debug, Deserialize)]
++struct ProcessRequest {
++    #[serde(default)]
++    scope: koharu_pipeline::Scope,
++    #[serde(default)]
++    operation: koharu_pipeline::Operation,
++}
++
++#[derive(Debug, Deserialize)]
++struct StopRequest {
++    job: JobId,
++}
++
++#[derive(Debug, Deserialize)]
++struct ExportRequest {
++    directory: PathBuf,
++    #[serde(default)]
++    pages: Vec<EntityId>,
++    format: ExportFormat,
++}
++
++#[derive(Debug, Deserialize)]
++struct McpRequest {
++    #[allow(dead_code)]
++    jsonrpc: Option<String>,
++    id: Option<Value>,
++    method: String,
++    #[serde(default)]
++    params: Value,
++}
++
++pub(crate) async fn serve(handle: AppHandle<Cef>, listener: tokio::net::TcpListener) -> Result<()> {
++    let app = Router::new()
++        .route("/", get(index))
++        .route("/api/v1/health", get(health))
++        .route("/api/v1/events", get(events))
++        .route("/api/v1/projects", get(list_projects).post(create_project))
++        .route("/api/v1/projects/open", post(open_project))
++        .route("/api/v1/projects/close", post(close_project))
++        .route("/api/v1/project", get(current_project))
++        .route("/api/v1/pages", get(pages).post(import_pages))
++        .route("/api/v1/pages/select", post(select_page))
++        .route("/api/v1/pages/{page}", get(page_scene))
++        .route("/api/v1/text/source", post(set_source_text))
++        .route("/api/v1/text/translation", post(set_translation))
++        .route("/api/v1/review/decision", post(apply_review_decision))
++        .route("/api/v1/text/typography", post(set_typography))
++        .route("/api/v1/text/geometry", post(set_geometry))
++        .route("/api/v1/layers/delete", post(delete_layers))
++        .route("/api/v1/pipeline", post(start_pipeline))
++        .route("/api/v1/pipeline/stop", post(stop_pipeline))
++        .route("/api/v1/jobs", get(jobs))
++        .route("/api/v1/fonts", get(available_fonts))
++        .route(
++            "/api/v1/preferences",
++            get(get_preferences).post(save_preferences),
++        )
++        .route("/api/v1/translation/models", get(translation_models))
++        .route("/api/v1/export", post(export_pages))
++        .route("/mcp", post(mcp))
++        .with_state(handle);
++    axum::serve(listener, app).await?;
++    Ok(())
++}
++
++async fn index() -> Html<&'static str> {
++    Html(INDEX_HTML)
++}
++
++async fn health(State(handle): State<AppHandle<Cef>>) -> Json<Health> {
++    Json(health_value(&handle))
++}
++
++fn health_value(handle: &AppHandle<Cef>) -> Health {
++    let initialization = handle.state::<Initialization>();
++    let initialization_error = initialization.error();
++    let initialized = initialization.is_ready();
++    Health {
++        status: if initialization_error.is_some() {
++            "failed"
++        } else if initialized {
++            "ok"
++        } else {
++            "starting"
++        },
++        version: env!("CARGO_PKG_VERSION"),
++        initialized,
++        initialization_error,
++    }
++}
++
++async fn events(
++    State(handle): State<AppHandle<Cef>>,
++) -> Sse<impl futures::Stream<Item = std::result::Result<Event, Infallible>>> {
++    let receiver = handle.state::<ApiEvents>().sender.subscribe();
++    let stream = stream::unfold(receiver, |mut receiver| async move {
++        loop {
++            match receiver.recv().await {
++                Ok(event) => {
++                    let item = Event::default().event("koharu").json_data(event);
++                    return Some((Ok(item.expect("API events must serialize")), receiver));
++                }
++                Err(broadcast::error::RecvError::Lagged(_)) => continue,
++                Err(broadcast::error::RecvError::Closed) => return None,
++            }
++        }
++    });
++    Sse::new(stream).keep_alive(
++        KeepAlive::new()
++            .interval(Duration::from_secs(15))
++            .text("keep-alive"),
++    )
++}
++
++async fn list_projects(
++    State(handle): State<AppHandle<Cef>>,
++) -> std::result::Result<Json<Vec<ProjectSummary>>, ApiError> {
++    Ok(Json(lifecycle::list_projects(handle.state()).await?))
++}
++
++async fn create_project(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<NameRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    lifecycle::create_project(request.name, handle).await?;
++    Ok(StatusCode::CREATED)
++}
++
++async fn open_project(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<NameRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    lifecycle::open_project(request.name, handle).await?;
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn close_project(
++    State(handle): State<AppHandle<Cef>>,
++) -> std::result::Result<StatusCode, ApiError> {
++    lifecycle::close_project(handle).await?;
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn current_project(
++    State(handle): State<AppHandle<Cef>>,
++) -> std::result::Result<Json<Option<ProjectInfo>>, ApiError> {
++    Ok(Json(lifecycle::get_project(handle.state()).await?))
++}
++
++async fn pages(
++    State(handle): State<AppHandle<Cef>>,
++) -> std::result::Result<Json<Vec<crate::commands::project::PageSummary>>, ApiError> {
++    Ok(Json(lifecycle::get_pages(handle.state()).await?))
++}
++
++async fn page_scene(
++    State(handle): State<AppHandle<Cef>>,
++    AxumPath(page): AxumPath<EntityId>,
++) -> std::result::Result<Json<Page>, ApiError> {
++    Ok(Json(load_page(&handle, page).await?))
++}
++
++async fn load_page(handle: &AppHandle<Cef>, page: EntityId) -> std::result::Result<Page, ApiError> {
++    let current = handle.state::<CurrentProject>();
++    let snapshot = current
++        .project
++        .lock()
++        .await
++        .as_ref()
++        .context("no project is open")
++        .map_err(ApiError::bad_request)?
++        .snapshot();
++    Project::page(&snapshot, page).map_err(ApiError::bad_request)
++}
++
++async fn import_pages(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<ImportRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    lifecycle::import_page_paths(
++        request.paths,
++        handle.state(),
++        handle.state(),
++        handle.state(),
++        handle.state(),
++    )
++    .await?;
++    Ok(StatusCode::CREATED)
++}
++
++async fn select_page(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<SelectPageRequest>,
++) -> std::result::Result<Json<lifecycle::PageSelection>, ApiError> {
++    Ok(Json(
++        lifecycle::select_page(handle.state(), request.page, handle.state(), handle.state())
++            .await?,
++    ))
++}
++
++async fn set_source_text(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<SourceTextRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    editing::set_source_text(
++        request.layer,
++        request.text,
++        handle.state(),
++        handle.state(),
++        handle.state(),
++    )
++    .await?;
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn set_translation(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<TranslationRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    editing::set_translation(
++        request.layer,
++        request.text,
++        handle.state(),
++        handle.state(),
++        handle.state(),
++    )
++    .await?;
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn apply_review_decision(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<ReviewDecisionRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    if let Err(error) = editing::apply_review_decision(
++        request.expected_revision,
++        request.layer,
++        request.text,
++        request.typography,
++        request.preserve_source_pixels,
++        handle.state(),
++        handle.state(),
++        handle.state(),
++    )
++    .await
++    {
++        let message = error.message().to_owned();
++        return Err(if message.starts_with("stale review revision:") {
++            ApiError::conflict(message)
++        } else {
++            ApiError::from(error)
++        });
++    }
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn set_typography(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<TypographyRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    editing::set_typography(
++        request.updates,
++        handle.state(),
++        handle.state(),
++        handle.state(),
++    )
++    .await?;
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn set_geometry(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<GeometryRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    editing::set_geometry(
++        request.updates,
++        handle.state(),
++        handle.state(),
++        handle.state(),
++    )
++    .await?;
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn delete_layers(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<DeleteLayersRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    editing::delete_layers(
++        request.layers,
++        handle.state(),
++        handle.state(),
++        handle.state(),
++    )
++    .await?;
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn start_pipeline(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<ProcessRequest>,
++) -> std::result::Result<Json<JobId>, ApiError> {
++    handle
++        .state::<Initialization>()
++        .wait()
++        .await
++        .map_err(ApiError::internal)?;
++    Ok(Json(
++        processing::process(
++            handle.clone(),
++            request.scope,
++            request.operation,
++            handle.state(),
++            handle.state(),
++            handle.state(),
++        )
++        .await?,
++    ))
++}
++
++async fn stop_pipeline(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<StopRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    processing::stop_job(request.job, handle.state()).await?;
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn jobs(
++    State(handle): State<AppHandle<Cef>>,
++) -> std::result::Result<Json<Vec<Job>>, ApiError> {
++    Ok(Json(job_values(&handle)))
++}
++
++fn job_values(handle: &AppHandle<Cef>) -> Vec<Job> {
++    let mut jobs = handle
++        .state::<Processing>()
++        .jobs
++        .lock()
++        .values()
++        .cloned()
++        .collect::<Vec<_>>();
++    jobs.sort_by_key(|job| job.id.to_string());
++    jobs
++}
++
++async fn available_fonts(
++    State(handle): State<AppHandle<Cef>>,
++) -> std::result::Result<Json<Vec<fonts::FontFamily>>, ApiError> {
++    handle
++        .state::<Initialization>()
++        .wait()
++        .await
++        .map_err(ApiError::internal)?;
++    Ok(Json(fonts::get_fonts(handle.state()).await?))
++}
++
++async fn get_preferences() -> std::result::Result<Json<preferences::Preferences>, ApiError> {
++    Ok(Json(preferences::get_preferences().await?))
++}
++
++async fn save_preferences(
++    Json(request): Json<PreferencesRequest>,
++) -> std::result::Result<Json<preferences::Preferences>, ApiError> {
++    Ok(Json(
++        preferences::save_preferences(request.pipeline, request.providers, request.typesetting)
++            .await?,
++    ))
++}
++
++async fn translation_models() -> std::result::Result<Json<Vec<koharu_translator::Model>>, ApiError>
++{
++    Ok(Json(preferences::get_translation_models().await?))
++}
++
++async fn export_pages(
++    State(handle): State<AppHandle<Cef>>,
++    Json(request): Json<ExportRequest>,
++) -> std::result::Result<StatusCode, ApiError> {
++    output::export_pages_to_directory(
++        request.pages,
++        request.format,
++        request.directory,
++        handle.state(),
++        handle.state(),
++    )
++    .await?;
++    Ok(StatusCode::NO_CONTENT)
++}
++
++async fn mcp(State(handle): State<AppHandle<Cef>>, Json(request): Json<McpRequest>) -> Response {
++    if request.method == "notifications/initialized" {
++        return StatusCode::ACCEPTED.into_response();
++    }
++    let id = request.id.unwrap_or(Value::Null);
++    let result = match request.method.as_str() {
++        "initialize" => Ok(json!({
++            "protocolVersion": MCP_LEGACY_VERSION,
++            "capabilities": { "tools": { "listChanged": false } },
++            "serverInfo": { "name": "koharu-local", "version": env!("CARGO_PKG_VERSION") },
++            "instructions": "Use Koharu tools to manage the active local manga project."
++        })),
++        "server/discover" => Ok(json!({
++            "protocolVersion": MCP_PROTOCOL_VERSION,
++            "capabilities": { "tools": {} },
++            "serverInfo": { "name": "koharu-local", "version": env!("CARGO_PKG_VERSION") }
++        })),
++        "ping" => Ok(json!({})),
++        "tools/list" => Ok(json!({ "tools": mcp_tools() })),
++        "tools/call" => mcp_call(&handle, request.params).await,
++        method => Err(ApiError::bad_request(format!(
++            "unsupported MCP method {method:?}"
++        ))),
++    };
++    match result {
++        Ok(result) => Json(json!({ "jsonrpc": "2.0", "id": id, "result": result })).into_response(),
++        Err(error) if request.method == "tools/call" => Json(json!({
++            "jsonrpc": "2.0",
++            "id": id,
++            "result": {
++                "content": [{ "type": "text", "text": error.message }],
++                "isError": true
++            }
++        }))
++        .into_response(),
++        Err(error) => Json(json!({
++            "jsonrpc": "2.0",
++            "id": id,
++            "error": { "code": -32602, "message": error.message }
++        }))
++        .into_response(),
++    }
++}
++
++async fn mcp_call(handle: &AppHandle<Cef>, params: Value) -> std::result::Result<Value, ApiError> {
++    let name = params
++        .get("name")
++        .and_then(Value::as_str)
++        .context("MCP tools/call requires params.name")
++        .map_err(ApiError::bad_request)?;
++    let arguments = params
++        .get("arguments")
++        .cloned()
++        .unwrap_or_else(|| json!({}));
++    let structured = match name {
++        "koharu_status" => json!({
++            "health": health_value(handle),
++            "project": lifecycle::get_project(handle.state()).await?,
++            "jobs": job_values(handle),
++        }),
++        "list_projects" => json!({
++            "projects": lifecycle::list_projects(handle.state()).await?
++        }),
++        "create_project" => {
++            let request: NameRequest = decode(arguments)?;
++            lifecycle::create_project(request.name, handle.clone()).await?;
++            json!({ "created": true })
++        }
++        "open_project" => {
++            let request: NameRequest = decode(arguments)?;
++            lifecycle::open_project(request.name, handle.clone()).await?;
++            json!({ "opened": true })
++        }
++        "current_project" => {
++            let project = lifecycle::get_project(handle.state()).await?;
++            let pages = if project.is_some() {
++                lifecycle::get_pages(handle.state()).await?
++            } else {
++                Vec::new()
++            };
++            json!({ "project": project, "pages": pages })
++        }
++        "page_scene" => {
++            let request: SelectPageRequest = decode(arguments)?;
++            json!({ "page": load_page(handle, request.page).await? })
++        }
++        "import_pages" => {
++            let request: ImportRequest = decode(arguments)?;
++            lifecycle::import_page_paths(
++                request.paths,
++                handle.state(),
++                handle.state(),
++                handle.state(),
++                handle.state(),
++            )
++            .await?;
++            json!({ "imported": true })
++        }
++        "run_pipeline" => {
++            let request: ProcessRequest = decode(arguments)?;
++            handle
++                .state::<Initialization>()
++                .wait()
++                .await
++                .map_err(ApiError::internal)?;
++            let job = processing::process(
++                handle.clone(),
++                request.scope,
++                request.operation,
++                handle.state(),
++                handle.state(),
++                handle.state(),
++            )
++            .await?;
++            json!({ "job": job })
++        }
++        "jobs" => json!({ "jobs": job_values(handle) }),
++        "set_source_text" => {
++            let request: SourceTextRequest = decode(arguments)?;
++            editing::set_source_text(
++                request.layer,
++                request.text,
++                handle.state(),
++                handle.state(),
++                handle.state(),
++            )
++            .await?;
++            json!({ "updated": true })
++        }
++        "set_translation" => {
++            let request: TranslationRequest = decode(arguments)?;
++            editing::set_translation(
++                request.layer,
++                request.text,
++                handle.state(),
++                handle.state(),
++                handle.state(),
++            )
++            .await?;
++            json!({ "updated": true })
++        }
++        "set_typography" => {
++            let request: TypographyRequest = decode(arguments)?;
++            editing::set_typography(
++                request.updates,
++                handle.state(),
++                handle.state(),
++                handle.state(),
++            )
++            .await?;
++            json!({ "updated": true })
++        }
++        "export_pages" => {
++            let request: ExportRequest = decode(arguments)?;
++            output::export_pages_to_directory(
++                request.pages,
++                request.format,
++                request.directory,
++                handle.state(),
++                handle.state(),
++            )
++            .await?;
++            json!({ "exported": true })
++        }
++        _ => {
++            return Err(ApiError::bad_request(format!(
++                "unknown Koharu tool {name:?}"
++            )));
++        }
++    };
++    let text = serde_json::to_string_pretty(&structured).map_err(ApiError::internal)?;
++    Ok(json!({
++        "content": [{ "type": "text", "text": text }],
++        "structuredContent": structured,
++        "isError": false
++    }))
++}
++
++fn decode<T: for<'de> Deserialize<'de>>(value: Value) -> std::result::Result<T, ApiError> {
++    serde_json::from_value(value).map_err(ApiError::bad_request)
++}
++
++fn mcp_tools() -> Vec<Value> {
++    vec![
++        tool(
++            "koharu_status",
++            "Report local Koharu readiness, active project, and jobs.",
++            json!({ "type": "object", "properties": {} }),
++        ),
++        tool(
++            "list_projects",
++            "List Koharu projects in the configured data directory.",
++            json!({ "type": "object", "properties": {} }),
++        ),
++        tool(
++            "create_project",
++            "Create and open a Koharu project.",
++            name_schema(),
++        ),
++        tool(
++            "open_project",
++            "Open an existing Koharu project.",
++            name_schema(),
++        ),
++        tool(
++            "current_project",
++            "Return the active project and its pages.",
++            json!({ "type": "object", "properties": {} }),
++        ),
++        tool(
++            "page_scene",
++            "Return layers, text, geometry, and regions for one page.",
++            json!({ "type": "object", "properties": { "page": { "type": "string" } }, "required": ["page"] }),
++        ),
++        tool(
++            "import_pages",
++            "Import local image, archive, or PDF paths into the active project.",
++            json!({ "type": "object", "properties": { "paths": { "type": "array", "items": { "type": "string" }, "minItems": 1 } }, "required": ["paths"] }),
++        ),
++        tool(
++            "run_pipeline",
++            "Start Koharu detection, OCR, translation, and/or inpainting.",
++            json!({ "type": "object", "properties": { "scope": { "type": "object" }, "operation": { "type": "object" } } }),
++        ),
++        tool(
++            "jobs",
++            "Return active Koharu pipeline jobs.",
++            json!({ "type": "object", "properties": {} }),
++        ),
++        tool(
++            "set_source_text",
++            "Correct OCR source text for a text layer.",
++            json!({ "type": "object", "properties": { "layer": { "type": "string" }, "text": { "type": "string" } }, "required": ["layer", "text"] }),
++        ),
++        tool(
++            "set_translation",
++            "Set or clear translated text for a text layer.",
++            json!({ "type": "object", "properties": { "layer": { "type": "string" }, "text": { "type": ["string", "null"] } }, "required": ["layer", "text"] }),
++        ),
++        tool(
++            "set_typography",
++            "Apply Koharu typography updates, including font, size, fit, alignment, writing mode, color, and stroke.",
++            json!({ "type": "object", "properties": { "updates": { "type": "array", "items": { "type": "object" } } }, "required": ["updates"] }),
++        ),
++        tool(
++            "export_pages",
++            "Render active project pages to PNG or PSD in a local directory.",
++            json!({ "type": "object", "properties": { "directory": { "type": "string" }, "pages": { "type": "array", "items": { "type": "string" } }, "format": { "enum": ["png", "psd"] } }, "required": ["directory", "format"] }),
++        ),
++    ]
++}
++
++fn tool(name: &str, description: &str, input_schema: Value) -> Value {
++    json!({ "name": name, "description": description, "inputSchema": input_schema })
++}
++
++fn name_schema() -> Value {
++    json!({
++        "type": "object",
++        "properties": { "name": { "type": "string", "minLength": 1 } },
++        "required": ["name"]
++    })
++}
++
++const INDEX_HTML: &str = r#"<!doctype html>
++<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
++<title>Koharu Local</title><style>
++:root{font-family:system-ui,sans-serif;color:#202124;background:#f7f5f2}body{margin:0}main{max-width:900px;margin:auto;padding:28px}
++h1{margin:0 0 6px}.card{background:white;border:1px solid #ddd7cf;border-radius:12px;padding:18px;margin:16px 0;box-shadow:0 2px 10px #0000000c}
++label{display:block;font-weight:600;margin:10px 0 4px}input,textarea,select,button{font:inherit;padding:9px;border:1px solid #bbb;border-radius:7px}
++input,textarea{box-sizing:border-box;width:100%}textarea{min-height:90px}button{cursor:pointer;background:#252525;color:white;margin:6px 6px 0 0}.muted{color:#666}pre{white-space:pre-wrap;overflow:auto}
++</style></head><body><main><h1>Koharu Local</h1><div class="muted">Web UI · REST API · MCP</div>
++<section class="card"><h2>Status</h2><button onclick="refresh()">Refresh</button><pre id="status">Loading…</pre></section>
++<section class="card"><h2>Project</h2><label>Name</label><input id="name" placeholder="project name"><button onclick="project('create')">Create</button><button onclick="project('open')">Open</button></section>
++<section class="card"><h2>Import</h2><label>One absolute path per line</label><textarea id="paths"></textarea><button onclick="importPages()">Import pages</button></section>
++<section class="card"><h2>Pipeline</h2><select id="operation"><option value="full">Full pipeline</option><option value="translation">Translation only</option><option value="ocr">OCR only</option></select><button onclick="runPipeline()">Start</button></section>
++<section class="card"><h2>Export</h2><label>Output directory</label><input id="output"><select id="format"><option>png</option><option>psd</option></select><button onclick="exportPages()">Export all</button></section>
++<section class="card"><h2>Result</h2><pre id="result"></pre></section>
++<script>
++const result=document.getElementById('result');async function call(path,method='GET',body){const r=await fetch(path,{method,headers:body?{'content-type':'application/json'}:{},body:body?JSON.stringify(body):undefined});const t=await r.text();if(!r.ok)throw Error(t||r.statusText);return t?JSON.parse(t):{} }
++async function refresh(){try{const [health,project,pages,jobs]=await Promise.all(['/api/v1/health','/api/v1/project','/api/v1/pages','/api/v1/jobs'].map(p=>call(p).catch(e=>({error:e.message}))));document.getElementById('status').textContent=JSON.stringify({health,project,pages,jobs},null,2)}catch(e){result.textContent=e}}
++async function project(action){try{await call(action==='open'?'/api/v1/projects/open':'/api/v1/projects','POST',{name:document.getElementById('name').value});await refresh()}catch(e){result.textContent=e}}
++async function importPages(){try{const paths=document.getElementById('paths').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);await call('/api/v1/pages','POST',{paths});await refresh()}catch(e){result.textContent=e}}
++async function runPipeline(){try{const value=document.getElementById('operation').value;const operation=value==='full'?{operation:'full'}:{operation:'only',stage:value};result.textContent=JSON.stringify(await call('/api/v1/pipeline','POST',{scope:{scope:'project'},operation}),null,2);await refresh()}catch(e){result.textContent=e}}
++async function exportPages(){try{await call('/api/v1/export','POST',{directory:document.getElementById('output').value,pages:[],format:document.getElementById('format').value});result.textContent='Export complete'}catch(e){result.textContent=e}}
++refresh();
++</script></main></body></html>"#;
++
++#[cfg(test)]
++mod tests {
++    use std::collections::HashSet;
++
++    use super::{INDEX_HTML, mcp_tools};
++
++    #[test]
++    fn embedded_web_ui_uses_registered_project_routes() {
++        assert!(INDEX_HTML.contains("action==='open'?'/api/v1/projects/open':'/api/v1/projects'"));
++        assert!(!INDEX_HTML.contains("'/api/v1/projects/'+"));
++    }
++
++    #[test]
++    fn mcp_tool_names_are_unique_and_schemas_are_objects() {
++        let tools = mcp_tools();
++        let mut names = HashSet::new();
++
++        for tool in tools {
++            let name = tool["name"].as_str().expect("tool name must be a string");
++            assert!(
++                names.insert(name.to_owned()),
++                "duplicate MCP tool name: {name}"
++            );
++            assert_eq!(tool["inputSchema"]["type"], "object");
++        }
++    }
++}
+diff --git a/crates/koharu-app/src/app.rs b/crates/koharu-app/src/app.rs
+index 565e7e0..82249b2 100644
+--- a/crates/koharu-app/src/app.rs
++++ b/crates/koharu-app/src/app.rs
+@@ -1,3 +1,5 @@
++use std::{net::IpAddr, path::PathBuf};
++
+ use anyhow::{Context as _, Result};
+ use tauri::{AppHandle, Cef, Manager as _, WindowEvent};
+ use tokio::sync::Mutex;
+@@ -13,6 +15,32 @@ use crate::commands::{
+     project::{CurrentProject, ProjectLibrary},
+ };
+ 
++#[derive(Clone, Debug)]
++pub struct RunConfig {
++    pub host: IpAddr,
++    pub port: u16,
++    pub headless: bool,
++    pub data_dir: Option<PathBuf>,
++}
++
++#[cfg(target_os = "windows")]
++fn runtime_store_root(
++    config: &RunConfig,
++    resource_dir: Option<PathBuf>,
++    executable: &std::path::Path,
++) -> Result<PathBuf> {
++    if let Some(resource_dir) = resource_dir {
++        return Ok(resource_dir.join("store"));
++    }
++    if config.headless {
++        return Ok(executable
++            .parent()
++            .context("failed to locate the headless Koharu executable directory")?
++            .join("store"));
++    }
++    anyhow::bail!("failed to locate Koharu's installation directory")
++}
++
+ #[tracing::instrument(
+     target = "koharu_metrics",
+     name = "app_started",
+@@ -64,20 +92,55 @@ pub(crate) async fn initialize(handle: AppHandle<Cef>) -> Result<()> {
+     Ok(())
+ }
+ 
+-pub fn run(context: tauri::Context<Cef>) -> Result<()> {
++pub fn run(context: tauri::Context<Cef>, config: RunConfig) -> Result<()> {
++    if !config.host.is_loopback() {
++        anyhow::bail!("the local Koharu service must bind to a loopback address");
++    }
++    let address = std::net::SocketAddr::new(config.host, config.port);
++    let listener = std::net::TcpListener::bind(address)
++        .with_context(|| format!("failed to bind the local Koharu service to {address}"))?;
++    listener
++        .set_nonblocking(true)
++        .context("failed to configure the local Koharu service listener")?;
+     let builder = tauri::Builder::<Cef>::default()
+         .command_line_args::<_, &str>([("--hide-chrome-bubbles", None)]);
++    let builder = if let Some(data_dir) = config.data_dir.as_ref() {
++        builder.root_cache_path(data_dir.join("cef"))
++    } else {
++        builder
++    };
+     #[cfg(debug_assertions)]
+-    let builder = builder.command_line_args([
+-        ("remote-debugging-port", Some("4000")),
+-        ("--use-mock-keychain", None),
+-    ]);
++    let builder = if config.headless {
++        // A headless service does not need an exposed CEF debugging socket.
++        // Leaving the debug-build default here made otherwise isolated
++        // non-default-port instances collide on the hard-coded port 4000.
++        builder.command_line_args([("--use-mock-keychain", None::<&str>)])
++    } else {
++        builder.command_line_args([
++            ("remote-debugging-port", Some("4000")),
++            ("--use-mock-keychain", None),
++        ])
++    };
+     #[cfg(target_os = "linux")]
+     let builder = builder.command_line_args([
+         ("enable-unsafe-webgpu", None),
+         ("enable-features", Some("Vulkan,VulkanFromANGLE")),
+         ("use-angle", Some("vulkan")),
+     ]);
++    let builder = if config.headless {
++        // Headless invocations are independent local API services selected by
++        // their explicit port and data directory.  Desktop single-instance
++        // activation would silently terminate a second isolated service.
++        builder
++    } else {
++        builder.plugin(tauri_plugin_single_instance::init(|handle, _, _| {
++            if let Some(window) = handle.get_webview_window("main") {
++                let _ = window.unminimize();
++                let _ = window.show();
++                let _ = window.set_focus();
++            }
++        }))
++    };
+     builder
+         .plugin(
+             tauri_plugin_log::Builder::new()
+@@ -89,13 +152,6 @@ pub fn run(context: tauri::Context<Cef>) -> Result<()> {
+                 ))
+                 .build(),
+         )
+-        .plugin(tauri_plugin_single_instance::init(|handle, _, _| {
+-            if let Some(window) = handle.get_webview_window("main") {
+-                let _ = window.unminimize();
+-                let _ = window.show();
+-                let _ = window.set_focus();
+-            }
+-        }))
+         .plugin(
+             tauri_plugin_window_state::Builder::default()
+                 .with_state_flags(
+@@ -112,21 +168,20 @@ pub fn run(context: tauri::Context<Cef>) -> Result<()> {
+         .invoke_handler(crate::commands::bindings().invoke_handler())
+         .setup(move |application| {
+             #[cfg(target_os = "windows")]
+-            koharu_runtime::Store::configure(
+-                application
+-                    .path()
+-                    .resource_dir()
+-                    .context("failed to locate Koharu's installation directory")?
+-                    .join("store"),
+-            )?;
++            koharu_runtime::Store::configure(runtime_store_root(
++                &config,
++                application.path().resource_dir().ok(),
++                &std::env::current_exe().context("failed to locate the Koharu executable")?,
++            )?)?;
+ 
+             application.manage(CurrentProject {
+                 project: Mutex::new(None),
+             });
+-            application.manage(ProjectLibrary::new()?);
++            application.manage(ProjectLibrary::new(config.data_dir.clone())?);
+             application.manage(Processing::default());
+             application.manage(CanvasChannel::default());
+             application.manage(JobChannel::default());
++            application.manage(crate::api::ApiEvents::default());
+             application.manage(DownloadChannel::default());
+             application.manage(ResourceChannel::default());
+             application.manage(ProjectChannel::default());
+@@ -146,16 +201,30 @@ pub fn run(context: tauri::Context<Cef>) -> Result<()> {
+             let window = tauri::WebviewWindowBuilder::from_config(application, window_config)?
+                 .build()
+                 .context("failed to create the main window")?;
+-            window.show().context("failed to show the main window")?;
+-            window
+-                .set_focus()
+-                .context("failed to focus the main window")?;
++            if !config.headless {
++                window.show().context("failed to show the main window")?;
++                window
++                    .set_focus()
++                    .context("failed to focus the main window")?;
++            }
++            let api_handle = handle.clone();
++            let api_listener = tokio::net::TcpListener::from_std(listener)
++                .context("failed to attach the local Koharu service listener")?;
++            drop(tauri::async_runtime::spawn(async move {
++                if let Err(error) = crate::api::serve(api_handle, api_listener).await {
++                    tracing::error!(%error, "local Koharu service stopped");
++                }
++            }));
+             let initialization_handle = handle.clone();
+             drop(tauri::async_runtime::spawn(async move {
+-                initialize(initialization_handle.clone())
+-                    .await
+-                    .expect("failed to initialize the desktop runtime");
+-                initialization_handle.state::<Initialization>().ready();
++                match initialize(initialization_handle.clone()).await {
++                    Ok(()) => initialization_handle.state::<Initialization>().ready(),
++                    Err(error) => {
++                        let error = format!("{error:#}");
++                        tracing::error!(%error, "failed to initialize the desktop runtime");
++                        initialization_handle.state::<Initialization>().fail(error);
++                    }
++                }
+             }));
+ 
+             let mut downloads = koharu_runtime::download::subscribe();
+@@ -278,3 +347,59 @@ pub fn run(context: tauri::Context<Cef>) -> Result<()> {
+         .run(context)?;
+     Ok(())
+ }
++
++#[cfg(all(test, target_os = "windows"))]
++mod tests {
++    use super::*;
++
++    #[test]
++    fn headless_store_falls_back_to_the_executable_directory() {
++        let config = RunConfig {
++            host: "127.0.0.1".parse().unwrap(),
++            port: 4010,
++            headless: true,
++            data_dir: Some(PathBuf::from(r"C:\koharu-data")),
++        };
++
++        assert_eq!(
++            runtime_store_root(&config, None, std::path::Path::new(r"C:\koharu\koharu.exe"))
++                .unwrap(),
++            PathBuf::from(r"C:\koharu\store")
++        );
++    }
++
++    #[test]
++    fn packaged_store_keeps_the_resource_directory_contract() {
++        let config = RunConfig {
++            host: "127.0.0.1".parse().unwrap(),
++            port: 4010,
++            headless: false,
++            data_dir: Some(PathBuf::from(r"C:\koharu-data")),
++        };
++
++        assert_eq!(
++            runtime_store_root(
++                &config,
++                Some(PathBuf::from(r"C:\koharu\resources")),
++                std::path::Path::new(r"C:\koharu\koharu.exe")
++            )
++            .unwrap(),
++            PathBuf::from(r"C:\koharu\resources\store")
++        );
++    }
++
++    #[test]
++    fn desktop_store_still_requires_an_installation_directory() {
++        let config = RunConfig {
++            host: "127.0.0.1".parse().unwrap(),
++            port: 4010,
++            headless: false,
++            data_dir: None,
++        };
++
++        assert!(
++            runtime_store_root(&config, None, std::path::Path::new(r"C:\koharu\koharu.exe"))
++                .is_err()
++        );
++    }
++}
+diff --git a/crates/koharu-app/src/commands/editing.rs b/crates/koharu-app/src/commands/editing.rs
+index 320a174..341bea5 100644
+--- a/crates/koharu-app/src/commands/editing.rs
++++ b/crates/koharu-app/src/commands/editing.rs
+@@ -1,6 +1,6 @@
+ use anyhow::Context as _;
+ use koharu_desktop::{CanvasState, Desktop};
+-use koharu_scene::EntityId;
++use koharu_scene::{EntityId, Revision};
+ use serde::Deserialize;
+ use specta::Type;
+ use tauri::State;
+@@ -170,6 +170,36 @@ pub(crate) async fn set_translation(
+     Ok(())
+ }
+ 
++pub(crate) async fn apply_review_decision(
++    expected_revision: Revision,
++    layer: EntityId,
++    text: Option<String>,
++    typography: Option<Typography>,
++    preserve_source_pixels: bool,
++    desktop: State<'_, Desktop>,
++    project: State<'_, CurrentProject>,
++    canvas_channel: State<'_, CanvasChannel>,
++) -> Result<(), Error> {
++    let (commit, page) = {
++        let mut project = project.project.lock().await;
++        let project = project.as_mut().context("no project is open")?;
++        let commit = project
++            .apply_review_decision(
++                expected_revision,
++                layer,
++                text,
++                typography,
++                preserve_source_pixels,
++            )
++            .await?;
++        project.record_commit(&commit);
++        (commit, project.active_page())
++    };
++    let canvas = synchronize_canvas(&desktop, &commit, page).await?;
++    canvas_channel.channel.publish(canvas);
++    Ok(())
++}
++
+ #[tracing::instrument(
+     target = "koharu_metrics",
+     name = "typography_edited",
+diff --git a/crates/koharu-app/src/commands/lifecycle.rs b/crates/koharu-app/src/commands/lifecycle.rs
+index 72cee1b..72ba1c1 100644
+--- a/crates/koharu-app/src/commands/lifecycle.rs
++++ b/crates/koharu-app/src/commands/lifecycle.rs
+@@ -4,6 +4,7 @@ use koharu_scene::{AssetInput, AssetMetadata, AssetRole, At, PageDraft};
+ use parking_lot::Mutex;
+ use serde::{Deserialize, Serialize};
+ use specta::Type;
++use std::path::PathBuf;
+ use strum::{EnumMessage as _, IntoEnumIterator as _};
+ use tauri::{AppHandle, Cef, Manager as _, State, WebviewWindow, ipc::Channel};
+ use walkdir::WalkDir;
+@@ -41,30 +42,58 @@ pub enum PageImportSource {
+ }
+ 
+ pub(crate) struct Initialization {
+-    ready: tokio::sync::watch::Sender<bool>,
++    state: tokio::sync::watch::Sender<InitializationState>,
++}
++
++#[derive(Clone, Debug)]
++enum InitializationState {
++    Starting,
++    Ready,
++    Failed(String),
+ }
+ 
+ impl Default for Initialization {
+     fn default() -> Self {
+-        let (ready, _) = tokio::sync::watch::channel(false);
+-        Self { ready }
++        let (state, _) = tokio::sync::watch::channel(InitializationState::Starting);
++        Self { state }
+     }
+ }
+ 
+ impl Initialization {
+     pub(crate) fn ready(&self) {
+-        self.ready.send_replace(true);
++        self.state.send_replace(InitializationState::Ready);
++    }
++
++    pub(crate) fn fail(&self, error: String) {
++        self.state.send_replace(InitializationState::Failed(error));
++    }
++
++    pub(crate) fn is_ready(&self) -> bool {
++        matches!(*self.state.borrow(), InitializationState::Ready)
+     }
+ 
+-    async fn wait(&self) -> Result<()> {
+-        let mut ready = self.ready.subscribe();
+-        while !*ready.borrow_and_update() {
+-            ready
++    pub(crate) fn error(&self) -> Option<String> {
++        match &*self.state.borrow() {
++            InitializationState::Failed(error) => Some(error.clone()),
++            InitializationState::Starting | InitializationState::Ready => None,
++        }
++    }
++
++    pub(crate) async fn wait(&self) -> Result<()> {
++        let mut state = self.state.subscribe();
++        loop {
++            match state.borrow_and_update().clone() {
++                InitializationState::Ready => return Ok(()),
++                InitializationState::Failed(error) => {
++                    return Err(anyhow::anyhow!("Koharu initialization failed: {error}"));
++                }
++                InitializationState::Starting => {}
++            }
++            state
+                 .changed()
+                 .await
+                 .context("startup state closed before initialization completed")?;
+         }
+-        Ok(())
+     }
+ }
+ 
+@@ -410,6 +439,19 @@ pub(crate) async fn import_pages(
+     let Some(files) = files else {
+         return Ok(());
+     };
++    import_page_paths(files, desktop, project, processing, canvas_channel).await
++}
++
++pub(crate) async fn import_page_paths(
++    files: Vec<PathBuf>,
++    desktop: State<'_, Desktop>,
++    project: State<'_, CurrentProject>,
++    processing: State<'_, Processing>,
++    canvas_channel: State<'_, CanvasChannel>,
++) -> std::result::Result<(), Error> {
++    if !processing.stops.lock().is_empty() {
++        return Err(anyhow::anyhow!("pages cannot be imported while processing is running").into());
++    }
+     if files.is_empty() {
+         return Err(anyhow::anyhow!("no supported images were found in the selection").into());
+     }
+diff --git a/crates/koharu-app/src/commands/mod.rs b/crates/koharu-app/src/commands/mod.rs
+index 39074b3..b1e160a 100644
+--- a/crates/koharu-app/src/commands/mod.rs
++++ b/crates/koharu-app/src/commands/mod.rs
+@@ -18,6 +18,12 @@ use tauri::ipc::{Channel, IpcResponse};
+ #[specta(transparent)]
+ pub(crate) struct Error(#[specta(type = String)] anyhow::Error);
+ 
++impl Error {
++    pub(crate) fn message(&self) -> String {
++        format!("{:#}", self.0)
++    }
++}
++
+ impl<E> From<E> for Error
+ where
+     E: Into<anyhow::Error>,
+diff --git a/crates/koharu-app/src/commands/output.rs b/crates/koharu-app/src/commands/output.rs
+index 3c2a0a8..7e14de1 100644
+--- a/crates/koharu-app/src/commands/output.rs
++++ b/crates/koharu-app/src/commands/output.rs
+@@ -10,8 +10,14 @@ use koharu_renderer::{Frame, Renderer};
+ use koharu_scene::{AssetRole, EntityId, Snapshot};
+ use serde::Deserialize;
+ use specta::Type;
+-use std::sync::Arc;
++use std::{
++    fs::OpenOptions,
++    io::Write as _,
++    path::{Path, PathBuf},
++    sync::Arc,
++};
+ use tauri::{Cef, State, WebviewWindow, ipc::IpcResponse};
++use uuid::Uuid;
+ 
+ use super::{Error, project::CurrentProject};
+ use koharu_desktop::Desktop;
+@@ -50,11 +56,6 @@ pub(crate) async fn export_pages(
+     project: State<'_, CurrentProject>,
+     desktop: State<'_, Desktop>,
+ ) -> std::result::Result<(), Error> {
+-    let snapshot = {
+-        let project = project.project.lock().await;
+-        let project = project.as_ref().context("no project is open")?;
+-        project.snapshot()
+-    };
+     let Some(directory) = rfd::AsyncFileDialog::new()
+         .set_parent(&window)
+         .pick_folder()
+@@ -63,6 +64,24 @@ pub(crate) async fn export_pages(
+     else {
+         return Ok(());
+     };
++    export_pages_to_directory(pages, format, directory, project, desktop).await
++}
++
++pub(crate) async fn export_pages_to_directory(
++    pages: Vec<EntityId>,
++    format: ExportFormat,
++    directory: PathBuf,
++    project: State<'_, CurrentProject>,
++    desktop: State<'_, Desktop>,
++) -> std::result::Result<(), Error> {
++    tokio::fs::create_dir_all(&directory)
++        .await
++        .with_context(|| format!("failed to create {}", directory.display()))?;
++    let snapshot = {
++        let project = project.project.lock().await;
++        let project = project.as_ref().context("no project is open")?;
++        project.snapshot()
++    };
+     let pages = if pages.is_empty() {
+         snapshot.pages().map(|page| page.id()).collect()
+     } else {
+@@ -104,6 +123,20 @@ pub(crate) async fn export_pages(
+             Ok::<_, anyhow::Error>((page_id, stem))
+         })
+         .collect::<Result<Vec<_>>>()?;
++    let extension = match format {
++        ExportFormat::Png => "png",
++        ExportFormat::Psd => "psd",
++    };
++    for (_, stem) in &jobs {
++        let target = directory.join(format!("{stem}.{extension}"));
++        if tokio::fs::try_exists(&target).await? {
++            return Err(anyhow::anyhow!(
++                "export target already exists and will not be overwritten: {}",
++                target.display()
++            )
++            .into());
++        }
++    }
+     stream::iter(jobs)
+         .map(|(page_id, stem)| {
+             let renderer = renderer.clone();
+@@ -119,20 +152,21 @@ pub(crate) async fn export_pages(
+                                 .await?
+                                 .image;
+                         tokio::task::spawn_blocking(move || -> Result<()> {
+-                            let file =
+-                                std::fs::File::create(directory.join(format!("{stem}.png")))?;
+-                            PngEncoder::new_with_quality(
+-                                file,
+-                                CompressionType::Best,
+-                                FilterType::Adaptive,
+-                            )
+-                            .write_image(
+-                                image.as_raw(),
+-                                image.width(),
+-                                image.height(),
+-                                ExtendedColorType::Rgba8,
+-                            )?;
+-                            Ok(())
++                            let target = directory.join(format!("{stem}.png"));
++                            write_new_export(&target, |file| {
++                                PngEncoder::new_with_quality(
++                                    file,
++                                    CompressionType::Best,
++                                    FilterType::Adaptive,
++                                )
++                                .write_image(
++                                    image.as_raw(),
++                                    image.width(),
++                                    image.height(),
++                                    ExtendedColorType::Rgba8,
++                                )?;
++                                Ok(())
++                            })
+                         })
+                         .await
+                         .context("PNG export worker stopped unexpectedly")??;
+@@ -145,7 +179,15 @@ pub(crate) async fn export_pages(
+                             &PsdExportOptions::default(),
+                         )
+                         .await?;
+-                        tokio::fs::write(directory.join(format!("{stem}.psd")), bytes).await?;
++                        let target = directory.join(format!("{stem}.psd"));
++                        tokio::task::spawn_blocking(move || {
++                            write_new_export(&target, |file| {
++                                file.write_all(&bytes)?;
++                                Ok(())
++                            })
++                        })
++                        .await
++                        .context("PSD export worker stopped unexpectedly")??;
+                     }
+                 }
+                 tracing::info!(
+@@ -162,6 +204,53 @@ pub(crate) async fn export_pages(
+     Ok(())
+ }
+ 
++fn write_new_export(
++    target: &Path,
++    write: impl FnOnce(&mut std::fs::File) -> Result<()>,
++) -> Result<()> {
++    let name = target
++        .file_name()
++        .and_then(|name| name.to_str())
++        .context("export target has no valid file name")?;
++    let temporary = target.with_file_name(format!(".{name}.koharu-{}.tmp", Uuid::new_v4()));
++    let mut file = OpenOptions::new()
++        .write(true)
++        .create_new(true)
++        .open(&temporary)
++        .with_context(|| {
++            format!(
++                "failed to create export staging file {}",
++                temporary.display()
++            )
++        })?;
++    let write_result = write(&mut file).and_then(|()| {
++        file.flush()?;
++        file.sync_all()?;
++        Ok(())
++    });
++    drop(file);
++    if let Err(error) = write_result {
++        let _ = std::fs::remove_file(&temporary);
++        return Err(error);
++    }
++    if let Err(error) = std::fs::hard_link(&temporary, target) {
++        let _ = std::fs::remove_file(&temporary);
++        return Err(error).with_context(|| {
++            format!(
++                "failed to publish export without overwriting {}",
++                target.display()
++            )
++        });
++    }
++    std::fs::remove_file(&temporary).with_context(|| {
++        format!(
++            "failed to remove export staging file {}",
++            temporary.display()
++        )
++    })?;
++    Ok(())
++}
++
+ #[tauri::command]
+ #[specta::specta]
+ pub(crate) async fn get_thumbnail(
+@@ -228,3 +317,37 @@ async fn rasterize(
+         .context("rasterizer worker stopped unexpectedly")?
+         .map_err(Into::into)
+ }
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++
++    #[test]
++    fn export_writer_publishes_complete_bytes_without_overwriting() {
++        let directory = std::env::temp_dir().join(format!("koharu-export-{}", Uuid::new_v4()));
++        std::fs::create_dir(&directory).unwrap();
++        let target = directory.join("page.png");
++        write_new_export(&target, |file| {
++            file.write_all(b"complete")?;
++            Ok(())
++        })
++        .unwrap();
++        assert_eq!(std::fs::read(&target).unwrap(), b"complete");
++
++        let error = write_new_export(&target, |file| {
++            file.write_all(b"replacement")?;
++            Ok(())
++        })
++        .unwrap_err();
++        assert!(error.to_string().contains("without overwriting"));
++        assert_eq!(std::fs::read(&target).unwrap(), b"complete");
++        assert_eq!(
++            std::fs::read_dir(&directory)
++                .unwrap()
++                .filter_map(|entry| entry.ok())
++                .count(),
++            1
++        );
++        std::fs::remove_dir_all(&directory).unwrap();
++    }
++}
+diff --git a/crates/koharu-app/src/commands/processing.rs b/crates/koharu-app/src/commands/processing.rs
+index 4693952..c995560 100644
+--- a/crates/koharu-app/src/commands/processing.rs
++++ b/crates/koharu-app/src/commands/processing.rs
+@@ -12,6 +12,11 @@ use uuid::Uuid;
+ use super::{ChannelExt as _, Error, canvas::CanvasChannel, project::CurrentProject};
+ use koharu_desktop::Desktop;
+ 
++fn publish_job(handle: &AppHandle<Cef>, job: Job) {
++    handle.state::<JobChannel>().channel.publish(job.clone());
++    handle.state::<crate::api::ApiEvents>().publish_job(job);
++}
++
+ #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, PartialEq, Serialize, Type)]
+ #[serde(transparent)]
+ pub struct JobId(Uuid);
+@@ -107,8 +112,13 @@ pub(crate) async fn process(
+         model: None,
+         error: None,
+     };
+-    processing.jobs.lock().insert(id, job.clone());
+-    job_channel.channel.publish(job);
++    {
++        let mut jobs = processing.jobs.lock();
++        jobs.retain(|_, job| job.state == JobState::Running);
++        jobs.insert(id, job.clone());
++    }
++    job_channel.channel.publish(job.clone());
++    handle.state::<crate::api::ApiEvents>().publish_job(job);
+ 
+     let pipeline = handle.state::<koharu_pipeline::Pipeline>().inner().clone();
+     let task_handle = handle.clone();
+@@ -199,7 +209,7 @@ pub(crate) async fn process(
+                     })
+                 };
+                 if let Some(job) = job {
+-                    progress_handle.state::<JobChannel>().channel.publish(job);
++                    publish_job(&progress_handle, job);
+                 }
+             }
+         }));
+@@ -258,8 +268,8 @@ pub(crate) async fn process(
+             .state::<Processing>()
+             .jobs
+             .lock()
+-            .remove(&id)
+-            .map(|mut job| {
++            .get_mut(&id)
++            .map(|job| {
+                 job.state = if stopped {
+                     JobState::Stopped
+                 } else if error.is_some() {
+@@ -268,10 +278,10 @@ pub(crate) async fn process(
+                     JobState::Finished
+                 };
+                 job.error = error;
+-                job
++                job.clone()
+             });
+         if let Some(job) = job {
+-            task_handle.state::<JobChannel>().channel.publish(job);
++            publish_job(&task_handle, job);
+         }
+     }));
+     Ok(id)
+diff --git a/crates/koharu-app/src/commands/project.rs b/crates/koharu-app/src/commands/project.rs
+index 6706c97..abcf13c 100644
+--- a/crates/koharu-app/src/commands/project.rs
++++ b/crates/koharu-app/src/commands/project.rs
+@@ -180,10 +180,13 @@ pub(crate) struct ProjectLibrary {
+ }
+ 
+ impl ProjectLibrary {
+-    pub(crate) fn new() -> Result<Self> {
+-        let root = dirs::document_dir()
+-            .context("the Documents directory is unavailable")?
+-            .join("Koharu");
++    pub(crate) fn new(root: Option<PathBuf>) -> Result<Self> {
++        let root = match root {
++            Some(root) => root,
++            None => dirs::document_dir()
++                .context("the Documents directory is unavailable")?
++                .join("Koharu"),
++        };
+         std::fs::create_dir_all(&root)
+             .with_context(|| format!("failed to create {}", root.display()))?;
+         Ok(Self { root })
+@@ -521,6 +524,124 @@ impl Project {
+         self.commit(patch).await
+     }
+ 
++    pub(crate) async fn apply_review_decision(
++        &mut self,
++        expected_revision: Revision,
++        layer: EntityId,
++        text: Option<String>,
++        typography: Option<Typography>,
++        preserve_source_pixels: bool,
++    ) -> Result<Commit> {
++        let snapshot = self.snapshot();
++        if snapshot.revision() != expected_revision {
++            bail!(
++                "stale review revision: expected {expected_revision}, current {}",
++                snapshot.revision()
++            );
++        }
++        if preserve_source_pixels != text.is_none()
++            || preserve_source_pixels == typography.is_some()
++        {
++            bail!("review decision fields are inconsistent");
++        }
++        let reviewed = if preserve_source_pixels {
++            None
++        } else {
++            let text = text.context("review translation text is missing")?;
++            if text.trim().is_empty() {
++                bail!("review translation text is empty");
++            }
++            let typography = typography.context("review typography is missing")?;
++            Some((text, typography))
++        };
++        let content = Self::text_content(&snapshot, layer)?;
++        let language = snapshot
++            .component::<SceneTranslation>(content)?
++            .and_then(|translation| translation.language);
++
++        let cleanup = if preserve_source_pixels {
++            let geometry = snapshot
++                .text_layer(layer)?
++                .frame()?
++                .context("the source-preservation layer has no geometry")?;
++            let mut page = layer;
++            while let Some(parent) = snapshot.parent(page)? {
++                page = parent;
++            }
++            snapshot.page(page)?;
++            let source_role = AssetRole::new("source")?;
++            let mut cleanup = None;
++            for entity in snapshot.descendants(page)? {
++                if snapshot
++                    .component::<SceneRasterLayer>(entity.id())?
++                    .is_some_and(|layer| layer.kind == RasterLayerKind::Cleanup)
++                {
++                    if let Some(asset) = snapshot.asset(entity.id(), &source_role)? {
++                        cleanup = Some((entity.id(), asset));
++                        break;
++                    }
++                }
++            }
++            if let Some((entity, asset)) = cleanup {
++                let bytes = snapshot.read_blob(asset.blob).await?;
++                let mut image = image::load_from_memory(&bytes)?.to_rgba8();
++                clear_geometry_alpha(&mut image, &geometry.points)?;
++                let mut encoded = Cursor::new(Vec::new());
++                DynamicImage::ImageRgba8(image).write_to(&mut encoded, ImageFormat::Png)?;
++                Some((entity, asset.metadata, encoded.into_inner()))
++            } else {
++                None
++            }
++        } else {
++            None
++        };
++
++        let patch = snapshot.patch(|edit| {
++            edit.promote_entity_to_user(layer)?;
++            edit.promote_entity_to_user(content)?;
++            if preserve_source_pixels {
++                edit.remove::<SceneTranslation>(content)?;
++                if let Some((entity, metadata, bytes)) = cleanup {
++                    edit.promote_entity_to_user(entity)?;
++                    edit.set_asset(
++                        entity,
++                        &AssetRole::new("source")?,
++                        AssetInput::new(bytes, "image/png", metadata),
++                    )?;
++                }
++                return Ok(());
++            }
++
++            let (text, typography) =
++                reviewed.expect("review fields were validated before patching");
++            edit.set(
++                content,
++                &SceneTranslation {
++                    text: Authored::user(text),
++                    language,
++                },
++            )?;
++            edit.set(
++                layer,
++                &SceneTypography {
++                    origin: Origin::User,
++                    preferred_font: typography.preferred_font,
++                    font_weight: typography.font_weight,
++                    font_style: typography.font_style,
++                    size: typography.size.filter(|size| *size > 0.0),
++                    auto_fit: typography.auto_fit,
++                    color: typography.color,
++                    stroke_color: typography.stroke_color,
++                    stroke_width: typography.stroke_width,
++                    alignment: typography.alignment,
++                    writing_mode: typography.writing_mode,
++                    extensions: Default::default(),
++                },
++            )
++        })?;
++        self.commit(patch).await
++    }
++
+     pub(crate) async fn set_typography(
+         &mut self,
+         updates: Vec<TypographyUpdate>,
+@@ -1257,6 +1378,104 @@ fn validate_project_name(name: &str) -> Result<String> {
+     Ok(name.to_owned())
+ }
+ 
++fn clear_geometry_alpha(image: &mut RgbaImage, points: &[ScenePoint]) -> Result<()> {
++    if points.len() < 3
++        || points
++            .iter()
++            .any(|point| !point.x.is_finite() || !point.y.is_finite())
++    {
++        bail!("source-preservation geometry is invalid");
++    }
++    let signed_double_area: f64 = points
++        .iter()
++        .zip(points.iter().cycle().skip(1))
++        .take(points.len())
++        .map(|(start, end)| start.x * end.y - end.x * start.y)
++        .sum();
++    if signed_double_area.abs() <= f64::EPSILON {
++        bail!("source-preservation geometry is degenerate");
++    }
++    const EDGE_PADDING: f64 = 2.0;
++    const EDGE_PADDING_SQUARED: f64 = EDGE_PADDING * EDGE_PADDING;
++    let min_x = points
++        .iter()
++        .map(|point| point.x)
++        .fold(f64::INFINITY, f64::min);
++    let min_y = points
++        .iter()
++        .map(|point| point.y)
++        .fold(f64::INFINITY, f64::min);
++    let max_x = points
++        .iter()
++        .map(|point| point.x)
++        .fold(f64::NEG_INFINITY, f64::max);
++    let max_y = points
++        .iter()
++        .map(|point| point.y)
++        .fold(f64::NEG_INFINITY, f64::max);
++    let width = i64::from(image.width());
++    let height = i64::from(image.height());
++    let left = ((min_x - EDGE_PADDING).floor() as i64).clamp(0, width);
++    let top = ((min_y - EDGE_PADDING).floor() as i64).clamp(0, height);
++    let right = ((max_x + EDGE_PADDING).ceil() as i64).clamp(0, width);
++    let bottom = ((max_y + EDGE_PADDING).ceil() as i64).clamp(0, height);
++    if left >= right || top >= bottom {
++        bail!("source-preservation geometry is outside the page");
++    }
++    let mut intersects_page = false;
++    for y in top..bottom {
++        for x in left..right {
++            let pixel_x = x as f64 + 0.5;
++            let pixel_y = y as f64 + 0.5;
++            let is_near_edge = points
++                .iter()
++                .zip(points.iter().cycle().skip(1))
++                .take(points.len())
++                .any(|(start, end)| {
++                    squared_distance_to_segment(pixel_x, pixel_y, start, end)
++                        <= EDGE_PADDING_SQUARED
++                });
++            if point_is_inside_polygon(pixel_x, pixel_y, points) || is_near_edge {
++                intersects_page = true;
++                image.get_pixel_mut(x as u32, y as u32)[3] = 0;
++            }
++        }
++    }
++    if !intersects_page {
++        bail!("source-preservation geometry does not cover the page");
++    }
++    Ok(())
++}
++
++fn point_is_inside_polygon(x: f64, y: f64, points: &[ScenePoint]) -> bool {
++    let mut inside = false;
++    for (start, end) in points
++        .iter()
++        .zip(points.iter().cycle().skip(1))
++        .take(points.len())
++    {
++        if (start.y > y) != (end.y > y)
++            && x < (end.x - start.x) * (y - start.y) / (end.y - start.y) + start.x
++        {
++            inside = !inside;
++        }
++    }
++    inside
++}
++
++fn squared_distance_to_segment(x: f64, y: f64, start: &ScenePoint, end: &ScenePoint) -> f64 {
++    let dx = end.x - start.x;
++    let dy = end.y - start.y;
++    let length_squared = dx * dx + dy * dy;
++    if length_squared <= f64::EPSILON {
++        return (x - start.x).powi(2) + (y - start.y).powi(2);
++    }
++    let projection = (((x - start.x) * dx + (y - start.y) * dy) / length_squared).clamp(0.0, 1.0);
++    let nearest_x = start.x + projection * dx;
++    let nearest_y = start.y + projection * dy;
++    (x - nearest_x).powi(2) + (y - nearest_y).powi(2)
++}
++
+ fn rasterize_stroke(
+     image: &mut RgbaImage,
+     mode: RasterStrokeMode,
+@@ -1438,6 +1657,136 @@ mod tests {
+         );
+     }
+ 
++    #[tokio::test]
++    async fn review_decision_rejects_stale_revision_and_reveals_source_pixels() {
++        let mut session = Session::memory().await.unwrap();
++        let mut ids = None;
++        let mut cleanup_bytes = Cursor::new(Vec::new());
++        DynamicImage::ImageRgba8(RgbaImage::from_pixel(
++            20,
++            20,
++            image::Rgba([240, 240, 240, 255]),
++        ))
++        .write_to(&mut cleanup_bytes, ImageFormat::Png)
++        .unwrap();
++        let setup = session
++            .snapshot()
++            .patch(|edit| {
++                let page = edit.add_page(PageDraft::new("page", 20.0, 20.0), At::End)?;
++                let cleanup = edit.add_entity(page, At::End)?;
++                edit.set(
++                    cleanup,
++                    &SceneRasterLayer {
++                        origin: Origin::User,
++                        name: "Cleanup".to_owned(),
++                        kind: RasterLayerKind::Cleanup,
++                    },
++                )?;
++                edit.set_asset(
++                    cleanup,
++                    &AssetRole::new("source")?,
++                    AssetInput::new(
++                        cleanup_bytes.into_inner(),
++                        "image/png",
++                        AssetMetadata {
++                            width: Some(20),
++                            height: Some(20),
++                            attributes: Default::default(),
++                        },
++                    ),
++                )?;
++                let content = edit.add_text_content(page, At::End)?;
++                edit.set(
++                    content,
++                    &SceneSourceText {
++                        text: Authored::user("原文".to_owned()),
++                        language: None,
++                    },
++                )?;
++                edit.set(
++                    content,
++                    &SceneTranslation {
++                        text: Authored::user("초벌".to_owned()),
++                        language: None,
++                    },
++                )?;
++                let layer = edit.add_text_layer(
++                    page,
++                    At::End,
++                    content,
++                    &SceneTextLayout {
++                        origin: Origin::User,
++                        kind: TextLayoutKind::Paragraph,
++                    },
++                )?;
++                edit.set(layer, &SceneGeometry::rectangle(7.0, 7.0, 5.0, 5.0))?;
++                ids = Some((page, cleanup, content, layer));
++                Ok(())
++            })
++            .unwrap();
++        session.commit(setup).await.unwrap();
++        let (page, cleanup, content, layer) = ids.unwrap();
++        let mut project = Project::new(session, "review".to_owned());
++
++        let stale_revision = project.revision();
++        let rename = project
++            .snapshot()
++            .patch(|edit| edit.set_page(page, PageDraft::new("renamed", 20.0, 20.0)))
++            .unwrap();
++        project.commit(rename).await.unwrap();
++        let error = project
++            .apply_review_decision(stale_revision, layer, None, None, true)
++            .await
++            .unwrap_err();
++        assert!(error.to_string().starts_with("stale review revision:"));
++        assert!(
++            project
++                .snapshot()
++                .component::<SceneTranslation>(content)
++                .unwrap()
++                .is_some()
++        );
++
++        project
++            .apply_review_decision(project.revision(), layer, None, None, true)
++            .await
++            .unwrap();
++        let snapshot = project.snapshot();
++        assert!(
++            snapshot
++                .component::<SceneTranslation>(content)
++                .unwrap()
++                .is_none()
++        );
++        let asset = snapshot
++            .asset(cleanup, &AssetRole::new("source").unwrap())
++            .unwrap()
++            .unwrap();
++        let bytes = snapshot.read_blob(asset.blob).await.unwrap();
++        let image = image::load_from_memory(&bytes).unwrap().to_rgba8();
++        assert_eq!(image.get_pixel(9, 9)[3], 0);
++        assert_eq!(image.get_pixel(4, 4)[3], 255);
++    }
++
++    #[test]
++    fn source_preservation_clears_only_the_padded_polygon() {
++        let mut image = RgbaImage::from_pixel(20, 20, image::Rgba([10, 20, 30, 255]));
++        clear_geometry_alpha(
++            &mut image,
++            &[
++                ScenePoint { x: 10.0, y: 3.0 },
++                ScenePoint { x: 17.0, y: 10.0 },
++                ScenePoint { x: 10.0, y: 17.0 },
++                ScenePoint { x: 3.0, y: 10.0 },
++            ],
++        )
++        .unwrap();
++        assert_eq!(image.get_pixel(10, 10)[3], 0);
++        assert_eq!(image.get_pixel(5, 5)[3], 0);
++        assert_eq!(image.get_pixel(4, 4)[3], 255);
++        assert_eq!(image.get_pixel(18, 18)[3], 255);
++    }
++
+     #[test]
+     fn raster_strokes_are_continuous_and_erasable() {
+         let mut image = RgbaImage::new(32, 16);
+diff --git a/crates/koharu-app/src/lib.rs b/crates/koharu-app/src/lib.rs
+index 8949f58..b628f4c 100644
+--- a/crates/koharu-app/src/lib.rs
++++ b/crates/koharu-app/src/lib.rs
+@@ -1,7 +1,10 @@
+ //! Koharu's Tauri-managed application state, commands, and lifecycle.
+ 
++#![recursion_limit = "256"]
++
++mod api;
+ mod app;
+ mod commands;
+ 
+-pub use app::run;
++pub use app::{RunConfig, run};
+ pub use commands::bindings;
+diff --git a/crates/koharu-pipeline/src/stages/detection.rs b/crates/koharu-pipeline/src/stages/detection.rs
+index d63dda5..cb1ffbe 100644
+--- a/crates/koharu-pipeline/src/stages/detection.rs
++++ b/crates/koharu-pipeline/src/stages/detection.rs
+@@ -190,6 +190,7 @@ struct DetectedText<'a> {
+     bounds: [f32; 4],
+     content: EntityId,
+     layer: EntityId,
++    dialogue_candidate: bool,
+ }
+ 
+ enum RegionOutput<'a> {
+@@ -301,7 +302,7 @@ fn write_regions<'a>(
+     let inferred = detections
+         .par_iter()
+         .map(|detection| {
+-            (detection.label == "text")
++            matches!(detection.label.as_str(), "text" | "onomatopoeia")
+                 .then(|| infer_typography(image, detection))
+                 .flatten()
+         })
+@@ -346,7 +347,7 @@ fn write_region<'a>(
+     let kind = region_kind(&detection.label)?;
+     let geometry = if detection.label == "bubble" {
+         mask_geometry(&detection.mask).unwrap_or_else(|| rectangle_geometry(detection.bbox))
+-    } else if detection.label == "text" {
++    } else if matches!(detection.label.as_str(), "text" | "onomatopoeia") {
+         inferred.map_or_else(
+             || rectangle_geometry(detection.bbox),
+             |typography| rotated_rectangle_geometry(detection.bbox, typography.angle_degrees),
+@@ -376,7 +377,7 @@ fn write_region<'a>(
+         },
+     )
+     .context("failed to set detection analysis")?;
+-    if detection.label != "text" {
++    if !matches!(detection.label.as_str(), "text" | "onomatopoeia") {
+         return Ok(if detection.label == "bubble" {
+             RegionOutput::Bubble(DetectedRegion {
+                 entity,
+@@ -398,7 +399,12 @@ fn write_region<'a>(
+             kind: TextLayoutKind::Paragraph,
+         },
+     )?;
+-    write_text_role(edit, content, "dev.koharu.text.free-text", generation)
++    let role = if detection.label == "onomatopoeia" {
++        "dev.koharu.text.sound-effect"
++    } else {
++        "dev.koharu.text.free-text"
++    };
++    write_text_role(edit, content, role, generation)
+         .context("failed to set the detected text role")?;
+     edit.set(
+         layer,
+@@ -429,6 +435,7 @@ fn write_region<'a>(
+         bounds: detection.bbox,
+         content,
+         layer,
++        dialogue_candidate: detection.label == "text",
+     }))
+ }
+ 
+@@ -438,6 +445,10 @@ fn link_dialogue_regions(
+     generation: &Generation,
+ ) -> Result<()> {
+     for text in &regions.texts {
++        if !text.dialogue_candidate {
++            edit.relate::<FitsTo>(text.layer, text.entity)?;
++            continue;
++        }
+         let bubble = containing_bubble(&regions.bubbles, text);
+         if let Some(bubble) = bubble {
+             edit.relate::<Inside>(text.entity, bubble.entity)?;
+@@ -1442,7 +1453,7 @@ async fn preserve_mask_outside_region(
+ 
+ fn region_kind(label: &str) -> Result<RegionKind> {
+     RegionKind::new(match label {
+-        "text" => TextRegion::KIND,
++        "text" | "onomatopoeia" => TextRegion::KIND,
+         "bubble" => BubbleRegion::KIND,
+         "panel" => PanelRegion::KIND,
+         _ => "dev.koharu.region.unknown",
+@@ -1839,8 +1850,8 @@ mod tests {
+     };
+     use koharu_ml::koharu_layout_rfdetr_seg_2xl::{KoharuLayoutDetection, KoharuLayoutMask};
+     use koharu_scene::{
+-        At, BubbleRegion, FitsTo, FlowsIn, Geometry, Inside, Origin, PageDraft, Session,
+-        TextLayout, TextLayoutKind, TextRegion, Typography, WritingMode,
++        At, BubbleRegion, FitsTo, FlowsIn, Geometry, Inside, Origin, PageDraft, Region, RegionSpec,
++        Session, TextLayout, TextLayoutKind, TextRegion, TextRole, Typography, WritingMode,
+     };
+ 
+     use super::{
+@@ -1957,6 +1968,7 @@ mod tests {
+                             bounds: [0.0, 0.0, 1.0, 1.0],
+                             content,
+                             layer,
++                            dialogue_candidate: true,
+                         }],
+                     },
+                     &generation,
+@@ -2264,6 +2276,60 @@ mod tests {
+         assert_eq!(typography.stroke_width, Some(3.0));
+     }
+ 
++    #[tokio::test]
++    async fn onomatopoeia_becomes_a_sound_effect_text_layer() {
++        let mut session = Session::memory().await.unwrap();
++        let mut ids = None;
++        let detection = detection("onomatopoeia", 1.0, [10.0, 20.0, 50.0, 80.0]);
++        let generation = generation(super::PRODUCER, super::MODEL_ID).unwrap();
++        let create = session
++            .snapshot()
++            .patch(|edit| {
++                let page = edit.add_page(PageDraft::new("page", 100.0, 100.0), At::End)?;
++                let output = write_region(edit, page, &detection, None, &generation).unwrap();
++                let RegionOutput::Text(text) = output else {
++                    panic!("expected an onomatopoeia text region");
++                };
++                ids = Some((text.entity, text.content, text.layer));
++                link_dialogue_regions(
++                    edit,
++                    &PageRegions {
++                        bubbles: Vec::new(),
++                        texts: vec![text],
++                    },
++                    &generation,
++                )
++                .unwrap();
++                Ok(())
++            })
++            .unwrap();
++        let snapshot = session.commit(create).await.unwrap().snapshot;
++        let (region, content, layer) = ids.unwrap();
++
++        assert_eq!(
++            snapshot.component::<Region>(region).unwrap().unwrap().kind,
++            TextRegion::kind()
++        );
++        assert_eq!(
++            snapshot
++                .component::<TextRole>(content)
++                .unwrap()
++                .unwrap()
++                .role,
++            "dev.koharu.text.sound-effect"
++        );
++        assert_eq!(
++            snapshot
++                .relation_from::<FitsTo>(layer)
++                .unwrap()
++                .unwrap()
++                .value()
++                .target,
++            region
++        );
++        assert!(snapshot.relation_from::<FlowsIn>(layer).unwrap().is_none());
++    }
++
+     #[test]
+     fn nms_removes_lower_scored_overlapping_regions_per_class() {
+         let mut detections = vec![
+diff --git a/crates/koharu-pipeline/src/stages/ocr.rs b/crates/koharu-pipeline/src/stages/ocr.rs
+index 89f7965..5bb0e12 100644
+--- a/crates/koharu-pipeline/src/stages/ocr.rs
++++ b/crates/koharu-pipeline/src/stages/ocr.rs
+@@ -6,12 +6,12 @@ use anyhow::{Context as _, Result, anyhow, bail};
+ use async_trait::async_trait;
+ use image::DynamicImage;
+ use koharu_ml::{
+-    baberu_ocr::BaberuOcr, manga_ocr::MangaOcr, paddle_ocr_vl::PaddleOCRVLTask,
+-    paddle_ocr_vl_quantized::PaddleOCRVLQuantized,
++    baberu_ocr::BaberuOcr, comic_onomatopoeia::ComicOnomatopoeiaRecognizer, manga_ocr::MangaOcr,
++    paddle_ocr_vl::PaddleOCRVLTask, paddle_ocr_vl_quantized::PaddleOCRVLQuantized,
+ };
+ use koharu_scene::{
+     Authored, EntityId, Geometry, LanguageTag, OcrAnalysis, Origin, RecognizedFrom, Region,
+-    RegionSpec, SourceText, TextDirection, TextRegion,
++    RegionSpec, SourceText, TextDirection, TextRegion, TextRole,
+ };
+ 
+ const PRODUCER: &str = "dev.koharu.pipeline.ocr";
+@@ -63,32 +63,43 @@ impl StageProcessor for Processor {
+     }
+ }
+ 
+-enum Model {
++enum TextModel {
+     Manga(Arc<Mutex<MangaOcr>>),
+     Baberu(Arc<Mutex<BaberuOcr>>),
+     Paddle(Arc<Mutex<PaddleOCRVLQuantized>>),
+ }
+ 
++struct Model {
++    text: TextModel,
++    device: koharu_ml::Device,
++    sound_effect: tokio::sync::OnceCell<Arc<Mutex<ComicOnomatopoeiaRecognizer>>>,
++}
++
+ impl Model {
+     async fn load(device: koharu_ml::Device, config: &OcrModel) -> Result<Self> {
+-        match config {
+-            OcrModel::MangaOcr => Ok(Self::Manga(Arc::new(Mutex::new(
+-                MangaOcr::load(device).await?,
+-            )))),
+-            OcrModel::BaberuOcr => Ok(Self::Baberu(Arc::new(Mutex::new(
+-                BaberuOcr::load(device).await?,
+-            )))),
+-            OcrModel::PaddleOcrVl1_6 => Ok(Self::Paddle(Arc::new(Mutex::new(
+-                PaddleOCRVLQuantized::load(device).await?,
+-            )))),
+-        }
++        let text = match config {
++            OcrModel::MangaOcr => {
++                TextModel::Manga(Arc::new(Mutex::new(MangaOcr::load(device.clone()).await?)))
++            }
++            OcrModel::BaberuOcr => {
++                TextModel::Baberu(Arc::new(Mutex::new(BaberuOcr::load(device.clone()).await?)))
++            }
++            OcrModel::PaddleOcrVl1_6 => TextModel::Paddle(Arc::new(Mutex::new(
++                PaddleOCRVLQuantized::load(device.clone()).await?,
++            ))),
++        };
++        Ok(Self {
++            text,
++            device,
++            sound_effect: tokio::sync::OnceCell::new(),
++        })
+     }
+ 
+     async fn run(&self, input: StageInput) -> Result<koharu_scene::Patch> {
+-        let model_name = match self {
+-            Self::Manga(_) => "manga-ocr",
+-            Self::Baberu(_) => "baberu-ocr",
+-            Self::Paddle(_) => "paddleocr-vl-1.6",
++        let model_name = match &self.text {
++            TextModel::Manga(_) => "manga-ocr",
++            TextModel::Baberu(_) => "baberu-ocr",
++            TextModel::Paddle(_) => "paddleocr-vl-1.6",
+         };
+         let page = input.page;
+         let mut targets = Vec::new();
+@@ -118,6 +129,10 @@ impl Model {
+             for relation in input.scene.relations_to_as::<RecognizedFrom>(region) {
+                 let content = relation.value().source;
+                 let previous = input.scene.component::<SourceText>(content)?;
++                let sound_effect = input
++                    .scene
++                    .component::<TextRole>(content)?
++                    .is_some_and(|role| role.role == "dev.koharu.text.sound-effect");
+                 if previous
+                     .as_ref()
+                     .is_some_and(|value| matches!(value.text.origin, Origin::User))
+@@ -130,30 +145,50 @@ impl Model {
+                     geometry: geometry.clone(),
+                     previous,
+                     image: crop.clone(),
++                    sound_effect,
+                 });
+             }
+         }
+ 
+-        let results = match self {
+-            Self::Manga(model) => {
+-                infer_text(model.clone(), targets, |model, image| {
++        let (sound_effect_targets, text_targets): (Vec<_>, Vec<_>) =
++            targets.into_iter().partition(|target| target.sound_effect);
++        let mut results = match &self.text {
++            TextModel::Manga(model) => {
++                infer_text(model.clone(), text_targets, |model, image| {
+                     model.inference(image)
+                 })
+                 .await?
+             }
+-            Self::Baberu(model) => {
+-                infer_text(model.clone(), targets, |model, image| {
++            TextModel::Baberu(model) => {
++                infer_text(model.clone(), text_targets, |model, image| {
+                     model.inference(image)
+                 })
+                 .await?
+             }
+-            Self::Paddle(model) => {
+-                infer_text(model.clone(), targets, |model, image| {
++            TextModel::Paddle(model) => {
++                infer_text(model.clone(), text_targets, |model, image| {
+                     Ok(model.inference(image, PaddleOCRVLTask::Ocr)?.text)
+                 })
+                 .await?
+             }
+         };
++        if !sound_effect_targets.is_empty() {
++            let device = self.device.clone();
++            let model = self
++                .sound_effect
++                .get_or_try_init(|| async move {
++                    Ok::<_, anyhow::Error>(Arc::new(Mutex::new(
++                        ComicOnomatopoeiaRecognizer::load(device).await?,
++                    )))
++                })
++                .await?
++                .clone();
++            let mut sound_effects = infer_text(model, sound_effect_targets, |model, image| {
++                Ok(model.inference(image)?.text)
++            })
++            .await?;
++            results.append(&mut sound_effects);
++        }
+ 
+         let generation = generation(PRODUCER, model_name)?;
+         let mut edit = input.scene.edit_as(generation.clone());
+@@ -201,6 +236,7 @@ struct OcrTarget {
+     geometry: Geometry,
+     previous: Option<SourceText>,
+     image: DynamicImage,
++    sound_effect: bool,
+ }
+ 
+ struct OcrResult {
+diff --git a/crates/koharu-pipeline/src/stages/translation.rs b/crates/koharu-pipeline/src/stages/translation.rs
+index 451d0d6..16dda25 100644
+--- a/crates/koharu-pipeline/src/stages/translation.rs
++++ b/crates/koharu-pipeline/src/stages/translation.rs
+@@ -46,14 +46,18 @@ impl StageProcessor for Processor {
+                     continue;
+                 };
+                 if !source.text.value.trim().is_empty() {
+-                    targets.push((content.id(), source.text.value));
++                    let role = content.role()?.map_or_else(String::new, |value| value.role);
++                    targets.push((content.id(), layer.id(), source.text.value, role));
+                 }
+             }
+         }
+         let mut request = TranslationRequest::new(
+-            targets.iter().map(|(_, source)| source.clone()),
++            targets.iter().map(|(_, _, source, _)| source.clone()),
+             self.config.target_language,
+-        );
++        )
++        .with_segment_keys(targets.iter().map(|(_, layer, _, _)| layer.to_string()))
++        .with_segment_roles(targets.iter().map(|(_, _, _, role)| role.clone()))
++        .with_page_key(input.page.to_string());
+         if let Some(instructions) = self.config.instructions.as_deref() {
+             request = request.with_instructions(instructions);
+         }
+@@ -69,11 +73,11 @@ impl StageProcessor for Processor {
+         let language = LanguageTag::new(self.config.target_language.tag())?;
+         let generated = generation(PRODUCER, provider)?;
+         let mut edit = input.scene.edit_as(generated.clone());
+-        for (entity, _) in &targets {
++        for (entity, _, _, _) in &targets {
+             edit.observe::<SourceText>(*entity)?;
+             edit.observe::<Translation>(*entity)?;
+         }
+-        for ((entity, source), text) in targets.into_iter().zip(translated) {
++        for ((entity, _, source, _), text) in targets.into_iter().zip(translated) {
+             if input
+                 .scene
+                 .component::<Translation>(entity)?
+diff --git a/crates/koharu-translator/src/backend.rs b/crates/koharu-translator/src/backend.rs
+index 42aac22..e4ee496 100644
+--- a/crates/koharu-translator/src/backend.rs
++++ b/crates/koharu-translator/src/backend.rs
+@@ -13,6 +13,9 @@ const JPEG_QUALITY: u8 = 88;
+ #[derive(Debug, Clone, PartialEq)]
+ pub struct TranslationRequest {
+     pub segments: Vec<String>,
++    pub segment_keys: Vec<String>,
++    pub segment_roles: Vec<String>,
++    pub page_key: Option<String>,
+     pub source_language: Option<Language>,
+     pub target_language: Language,
+     pub instructions: Option<String>,
+@@ -28,6 +31,9 @@ impl TranslationRequest {
+     ) -> Self {
+         Self {
+             segments: segments.into_iter().map(Into::into).collect(),
++            segment_keys: Vec::new(),
++            segment_roles: Vec::new(),
++            page_key: None,
+             source_language: None,
+             target_language,
+             instructions: None,
+@@ -36,6 +42,27 @@ impl TranslationRequest {
+         }
+     }
+ 
++    #[must_use]
++    pub fn with_segment_keys(mut self, keys: impl IntoIterator<Item = impl Into<String>>) -> Self {
++        self.segment_keys = keys.into_iter().map(Into::into).collect();
++        self
++    }
++
++    #[must_use]
++    pub fn with_segment_roles(
++        mut self,
++        roles: impl IntoIterator<Item = impl Into<String>>,
++    ) -> Self {
++        self.segment_roles = roles.into_iter().map(Into::into).collect();
++        self
++    }
++
++    #[must_use]
++    pub fn with_page_key(mut self, key: impl Into<String>) -> Self {
++        self.page_key = Some(key.into());
++        self
++    }
++
+     #[cfg(test)]
+     #[must_use]
+     pub fn with_source_language(mut self, language: Language) -> Self {
+diff --git a/crates/koharu-translator/src/remote/openai_compatible.rs b/crates/koharu-translator/src/remote/openai_compatible.rs
+index f4e704f..d7d0790 100644
+--- a/crates/koharu-translator/src/remote/openai_compatible.rs
++++ b/crates/koharu-translator/src/remote/openai_compatible.rs
+@@ -97,6 +97,7 @@ pub(super) async fn translate(
+         response_format: backend
+             .response_mode
+             .response_format(request.segments.len()),
++        metadata: RequestMetadata::new(request),
+     };
+     let http = client.post(backend.endpoint).json(&body);
+     let http = match backend.api_key {
+@@ -225,6 +226,28 @@ struct ChatRequest<'a> {
+     thinking: Option<ThinkingConfig>,
+     #[serde(skip_serializing_if = "Option::is_none")]
+     response_format: Option<ResponseFormat>,
++    #[serde(skip_serializing_if = "Option::is_none")]
++    metadata: Option<RequestMetadata<'a>>,
++}
++
++#[derive(Serialize)]
++struct RequestMetadata<'a> {
++    koharu_page_id: Option<&'a str>,
++    koharu_region_ids: &'a [String],
++    koharu_region_roles: &'a [String],
++}
++
++impl<'a> RequestMetadata<'a> {
++    fn new(request: &'a TranslationRequest) -> Option<Self> {
++        if request.page_key.is_none() && request.segment_keys.is_empty() {
++            return None;
++        }
++        Some(Self {
++            koharu_page_id: request.page_key.as_deref(),
++            koharu_region_ids: &request.segment_keys,
++            koharu_region_roles: &request.segment_roles,
++        })
++    }
+ }
+ 
+ #[derive(Clone, Copy, Serialize)]
+@@ -333,6 +356,7 @@ struct ListedModel {
+ #[cfg(test)]
+ mod tests {
+     use super::*;
++    use crate::Language;
+ 
+     #[test]
+     fn endpoint_preserves_base_path() {
+@@ -387,6 +411,7 @@ mod tests {
+             reasoning: None,
+             thinking: None,
+             response_format: None,
++            metadata: None,
+         };
+         let value = serde_json::to_value(request).unwrap();
+         assert_eq!(value["max_completion_tokens"], 1024);
+@@ -423,4 +448,22 @@ mod tests {
+         assert_eq!(value[1]["type"], "image_url");
+         assert_eq!(value[1]["image_url"]["url"], "data:image/jpeg;base64,image");
+     }
++
++    #[test]
++    fn serializes_optional_koharu_region_metadata() {
++        let request = TranslationRequest::new(["one", "two"], Language::Korean)
++            .with_page_key("page-1")
++            .with_segment_keys(["region-1", "region-2"])
++            .with_segment_roles(["dev.koharu.text.dialogue", "dev.koharu.text.sound-effect"]);
++        let value = serde_json::to_value(RequestMetadata::new(&request).unwrap()).unwrap();
++        assert_eq!(value["koharu_page_id"], "page-1");
++        assert_eq!(
++            value["koharu_region_ids"],
++            serde_json::json!(["region-1", "region-2"])
++        );
++        assert_eq!(
++            value["koharu_region_roles"],
++            serde_json::json!(["dev.koharu.text.dialogue", "dev.koharu.text.sound-effect"])
++        );
++    }
+ }
+diff --git a/crates/koharu/src/main.rs b/crates/koharu/src/main.rs
+index 96f9b12..206e72d 100644
+--- a/crates/koharu/src/main.rs
++++ b/crates/koharu/src/main.rs
+@@ -11,7 +11,23 @@ use tracing_subscriber::{Layer as _, filter::filter_fn, layer::SubscriberExt as
+ 
+ #[derive(clap::Parser)]
+ #[command(version, about)]
+-struct Cli {}
++struct Cli {
++    /// Address used by the local Web UI, HTTP API, and MCP endpoint.
++    #[arg(long, default_value = "127.0.0.1")]
++    host: std::net::IpAddr,
++
++    /// Port used by the local Web UI, HTTP API, and MCP endpoint.
++    #[arg(short, long, default_value_t = 4010)]
++    port: u16,
++
++    /// Run without showing the desktop window while keeping the local Web UI and API available.
++    #[arg(long)]
++    headless: bool,
++
++    /// Store Koharu projects under this directory instead of the default Documents/Koharu folder.
++    #[arg(long)]
++    data_dir: Option<std::path::PathBuf>,
++}
+ 
+ #[tokio::main]
+ #[tauri::cef_entry_point]
+@@ -26,7 +42,7 @@ async fn main() {
+         };
+     }
+ 
+-    let _cli = Cli::parse();
++    let cli = Cli::parse();
+     let _guard = sentry::initialize();
+     panic::install();
+     let filter = filter_fn(|metadata| metadata.target() != "koharu_metrics");
+@@ -42,6 +58,12 @@ async fn main() {
+             .with(koharu::tracing::TimingLayer::new().with_filter(filter)),
+     )
+     .expect("failed to set the global tracing subscriber");
+-    tokio::task::block_in_place(|| app::run(tauri::generate_context!()))
++    let config = app::RunConfig {
++        host: cli.host,
++        port: cli.port,
++        headless: cli.headless,
++        data_dir: cli.data_dir,
++    };
++    tokio::task::block_in_place(|| app::run(tauri::generate_context!(), config))
+         .expect("failed to run the desktop application");
+ }

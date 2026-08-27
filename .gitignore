@@ -1,0 +1,29 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local model weights and caches. The pinned model metadata lives in config/.
+models/
+.cache/
+
+# Koharu checkout, projects, runtime state, and generated evidence.
+vendor/
+data/
+run/
+artifacts/
+corpus/
+experiments/
+smoke/
+*.log
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.psd
+*.khr
+*.khrproj/
+
+# Local configuration may contain machine-specific paths.
+.env
+config/local.*
+config/local-*.cmd
