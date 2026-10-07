@@ -1,6 +1,15 @@
 # Koharu Hy-MT2 + Qwen pipeline
 
+<p align="center">
+  <img src="assets/pipeline-banner.svg" alt="Koharu HY–Qwen — Japanese-to-Korean translation with a first pass, review and validation" width="1120" />
+</p>
+
 An independent, experimental Japanese-to-Korean manga translation pipeline for [Koharu](https://github.com/mayocream/koharu). This repository is not an official Koharu project and is not an upstream contribution request.
+
+[Requirements](#requirements) · [GUI launcher](#windows-gui-launcher) · [Setup](#prepare-koharu) · [Verification](#verification) · [Limitations](#limitations)
+
+> [!IMPORTANT]
+> This is an experimental source project. Prepare the pinned Koharu build, CUDA-enabled Hy-MT2 and your own Qwen lifecycle integration before running the launcher. Model weights and a Qwen runtime are not bundled.
 
 The repository contains:
 
