@@ -177,6 +177,12 @@ The CI workflow runs the portable Python tests, Python compilation, and PowerShe
 - End-to-end operation requires an operator-supplied Qwen lifecycle implementation and model.
 - Automated and live functional validation do not replace manual source review or an independent security audit.
 
+## Help and bug reports
+
+After starting, open the local UI at http://127.0.0.1:4010/ and check that the intended model and language settings are available. The launcher alone does not prove a successful translation; the pipeline also needs your Qwen runtime and model.
+
+For reproducible setup or launcher failures, [open an issue](https://github.com/M-T-D-N/koharu-hy-qwen-pipeline/issues/new) with the repository revision, Windows/Python/CUDA versions, failing command, expected behavior and a short redacted error. Do not upload private manga pages, model weights, credentials or unredacted logs. Review the requirements and limitations before reporting unsupported configurations.
+
 ## AI development disclosure
 
 Most downstream modifications were generated and revised by OpenAI Codex from user-provided requirements and iterative acceptance requests. The repository owner did not manually review the source code. Validation is based on automated tests and live functional testing in the owner's Windows/Codex environment. No independent third-party code or security audit has been performed.
